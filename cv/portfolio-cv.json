@@ -1,0 +1,204 @@
+{
+  "name": "Vikash Vashisth, PhD",
+  "role": "CFD & Thermal-Fluid Engineer",
+  "contact": "Gothenburg, Sweden  |  +46 72 931 16 34  |  vikasche.engg@gmail.com",
+  "portfolio": "https://vikashvashisth.github.io/",
+  "pages": [
+    [
+      [
+        "section",
+        "PROFESSIONAL SUMMARY"
+      ],
+      [
+        "paragraph",
+        "CFD and thermal-fluid engineer developing experimentally validated models for reacting flows, multiphase systems and rotating equipment. Advanced ANSYS Fluent practitioner combining numerical verification, experimental evidence and physical interpretation to support design and operating decisions. Additional experience includes STAR-CCM+ conjugate heat transfer, Siemens NX, electromagnetic-CFD data transfer and Python/PyFluent automation."
+      ],
+      [
+        "section",
+        "CORE EXPERTISE"
+      ],
+      [
+        "skill",
+        "Physics",
+        "Reacting flows and finite-rate chemistry; multiphase VOF; heat and mass transfer; thermal radiation; rotating equipment; non-Newtonian free surfaces."
+      ],
+      [
+        "skill",
+        "Methods",
+        "RANS and LES; transient and sliding-mesh simulation; adaptive mesh refinement; mesh/time-step studies; convergence and conservation checks; experimental validation; HPC."
+      ],
+      [
+        "skill",
+        "Tools",
+        "ANSYS Fluent (advanced); STAR-CCM+ (CHT, meshing, solver setup and post-processing); ANSYS HFSS; Workbench, Meshing and DesignModeler; Siemens NX; Python/PyFluent, MATLAB, UDF/C, Tecplot and Linux."
+      ],
+      [
+        "section",
+        "PROFESSIONAL EXPERIENCE"
+      ],
+      [
+        "employer",
+        "Chalmers University of Technology",
+        "Gothenburg, Sweden"
+      ],
+      [
+        "position",
+        "Researcher - CFD and Multiphysics",
+        "Dec 2025 - Present"
+      ],
+      [
+        "position",
+        "Postdoctoral Researcher - CFD and Multiphysics",
+        "Dec 2022 - Dec 2025"
+      ],
+      [
+        "bullet",
+        "Developed 3D microwave-plasma reactor models coupling flow, heat transfer, species transport and finite-rate chemistry. Used predominantly laminar reactor modelling and transient LES for locally turbulent forced-quench jet mixing."
+      ],
+      [
+        "bullet",
+        "Validated gas temperatures, wall temperatures and outlet NOx against measurements. Identified configurations predicted to increase NO yield by 6-10% and reduce specific energy consumption by 6-8% relative to corresponding reference configurations."
+      ],
+      [
+        "bullet",
+        "Developed adaptive-mesh LES-VOF models of turbulent bubble and droplet breakup; compared observable breakup behaviour with high-speed experiments and resolved approximately 94% of turbulent kinetic energy."
+      ],
+      [
+        "bullet",
+        "Planned and executed an approximately two-million-core-hour HPC campaign, investigating internal flow, neck collapse and daughter-fragment formation, including interface features below experimental imaging resolution."
+      ],
+      [
+        "bullet",
+        "Lead biweekly CFD reviews with NitroCapt AB and research partners, explaining modelling assumptions, interpreting results and developing engineering recommendations."
+      ],
+      [
+        "bullet",
+        "Developed HFSS-to-Fluent data-transfer workflows for electromagnetic-CFD analysis. Ongoing work addresses automated iterative coupling using Python and PyFluent."
+      ]
+    ],
+    [
+      [
+        "section",
+        "PROFESSIONAL EXPERIENCE - CONTINUED"
+      ],
+      [
+        "employer",
+        "IIT Guwahati - Reckitt Benckiser Collaboration",
+        "Guwahati, India"
+      ],
+      [
+        "position",
+        "Research Associate - Industrial CFD Project",
+        "Jan 2022 - Apr 2022"
+      ],
+      [
+        "bullet",
+        "Developed transient 3D VOF models of shear-thinning rivulet flow using measured rheology to evaluate spreading and free-surface instability on inclined surfaces."
+      ],
+      [
+        "bullet",
+        "Established mesh independence and validated wetted-area and propagation trends against experiments; delivered technical findings to the industrial collaboration."
+      ],
+      [
+        "employer",
+        "Indian Institute of Technology Roorkee",
+        "Roorkee, India"
+      ],
+      [
+        "position",
+        "Doctoral Researcher - Fluid Mechanics and Mixing",
+        "Dec 2015 - Apr 2021"
+      ],
+      [
+        "bullet",
+        "Developed sliding-mesh RANS and LES models for conventional and tilted-hole rotor-stator mixers, quantifying pumping, power demand, turbulence, energy dissipation and mixing."
+      ],
+      [
+        "bullet",
+        "Achieved power-number agreement within 10% of benchmark data and assessed geometry-dependent mixing-power trade-offs. Built meshes up to 4.5 million cells and analysed tracer transport and dead zones."
+      ],
+      [
+        "section",
+        "SELECTED ENGINEERING PROJECT"
+      ],
+      [
+        "employer",
+        "Electric Drive Unit Cooling Jacket - CHT",
+        "2026"
+      ],
+      [
+        "position",
+        "Completed independent engineering study",
+        ""
+      ],
+      [
+        "bullet",
+        "Built parameterized CAD in Siemens NX and STAR-CCM+ CHT models coupling coolant flow with housing and equivalent-stator conduction under a nominal 5 kW heat load."
+      ],
+      [
+        "bullet",
+        "Completed a mesh-independence assessment and flow-rate/channel-turn comparisons. At 0.110 kg/s, seven turns reduced peak equivalent-stator temperature by 1.4 K with 16.2% higher total pressure loss than the six-turn reference."
+      ],
+      [
+        "bullet",
+        "Compared baseline predictions with ANSYS Fluent. Developed assisted extraction and PyFluent workflows for setup checks, checkpoint recovery, conservation reports and standardized exports."
+      ],
+      [
+        "section",
+        "EDUCATION"
+      ],
+      [
+        "employer",
+        "PhD, Chemical Engineering - IIT Roorkee",
+        "2015 - 2021"
+      ],
+      [
+        "paragraph",
+        "Thesis: Hydrodynamics and Mixing Studies in High Shear Mixers for Viscous Fluids"
+      ],
+      [
+        "employer",
+        "M.Tech, Chemical Engineering - IIT Roorkee",
+        "2011 - 2013"
+      ],
+      [
+        "section",
+        "SELECTED PUBLICATIONS AND TRAINING"
+      ],
+      [
+        "publication",
+        "Analysis of forced and intrinsic quenching in a plasma reactor for nitrogen fixation by use of three-dimensional simulations and experiments. Chemical Engineering Journal, 2026."
+      ],
+      [
+        "publication",
+        "Dynamics of bubble breakup under turbulent flow conditions. Chemical Engineering Journal, 2025."
+      ],
+      [
+        "publication",
+        "Analysis of a plasma reactor performance for direct nitrogen fixation by use of three-dimensional simulations and experiments. Chemical Engineering Journal, 2024."
+      ],
+      [
+        "paragraph",
+        "Ansys Learning Hub training: PyFluent and HFSS (2026)."
+      ],
+      [
+        "paragraph",
+        "English - fluent; Swedish - A2 certificate, continuing studies. Swedish driving licence (B); open to relocation within Sweden."
+      ]
+    ]
+  ],
+  "links": [
+    [
+      "LinkedIn",
+      "https://www.linkedin.com/in/vikash-vashisth-phd-b8576838"
+    ],
+    [
+      "Google Scholar",
+      "https://scholar.google.co.in/citations?user=JfO8GY8AAAAJ&hl=en"
+    ],
+    [
+      "ORCID",
+      "https://orcid.org/0000-0003-4644-2624"
+    ]
+  ]
+}
