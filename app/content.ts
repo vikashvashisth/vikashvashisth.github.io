@@ -35,7 +35,7 @@ export type Project = {
     evidence: { value: string; label: string }[];
     figures: { title: string; src: string; alt: string; caption: string }[];
     contribution?: string;
-    citations: { year: string; title: string; event: string; authors: string }[];
+    citations: { year: string; title: string; event: string; authors: string; doi?: string }[];
   };
   collaboration?: {
     eyebrow?: string;
@@ -44,7 +44,7 @@ export type Project = {
     evidence: { value: string; label: string }[];
     figures: { title: string; src: string; alt: string; caption: string }[];
     contribution?: string;
-    citations: { year: string; title: string; event: string; authors: string }[];
+    citations: { year: string; title: string; event: string; authors: string; doi?: string }[];
   };
   experimental?: {
     eyebrow?: string;
@@ -54,9 +54,9 @@ export type Project = {
     figures: { title: string; src: string; alt: string; caption: string }[];
     contribution?: string;
     recordLabel?: string;
-    citations: { year: string; title: string; event: string; authors: string }[];
+    citations: { year: string; title: string; event: string; authors: string; doi?: string }[];
   };
-  publications: { title: string; journal: string; year: string }[];
+  publications: { title: string; journal: string; year: string; doi?: string }[];
 };
 
 export const projects: Project[] = [
@@ -67,21 +67,21 @@ export const projects: Project[] = [
     question: "How can a microwave plasma reactor preserve newly formed NO while reducing the energy penalty caused by high-temperature backward reactions?",
     approach: ["Three-dimensional reacting-flow simulations with finite-rate air chemistry", "Warm-plasma treatment with chemical non-equilibrium", "Transient LES for the forced-quenching configuration", "Direct comparison with Raman, FTIR and wall-temperature measurements", "Baseline intrinsic quenching compared with split-feed impinging jets"],
     evidence: [{ value: "~6000 K", label: "resolved plasma-core temperature" }, { value: "+6-10%", label: "predicted NO-yield improvement" }, { value: "−6-8%", label: "predicted specific-energy reduction" }, { value: "<800 K", label: "quenched product-gas temperature" }],
-    outcomes: ["Resolved the coupled mass, momentum, heat and chemical-reaction fields inside a strongly three-dimensional swirling reactor.", "Identified spatially distinct NO-formation and NO-destruction regions and explained the role of intrinsic radial cooling.", "Showed how impinging jets reorganise the flow and suppress downstream thermal decomposition.", "Selected a quench configuration that improved predicted NO yield by 6-10%, reduced specific energy consumption by 6-8% and increased reactor efficiency by up to 70% relative to the intrinsic-quenching baseline."],
+    outcomes: ["Resolved the coupled mass, momentum, heat and chemical-reaction fields inside a strongly three-dimensional swirling reactor.", "Identified spatially distinct NO-formation and NO-destruction regions and explained the role of intrinsic radial cooling.", "Showed how impinging jets reorganise the flow and suppress downstream thermal decomposition.", "Selected a quench configuration that improved predicted NO yield by 6-10% and reduced specific energy consumption by 6-8% relative to the intrinsic-quenching baseline."],
     contribution: "Led development of the 3D CFD framework, selected the turbulence and kinetic modelling approach, performed simulations and numerical checks, compared predictions with experimental measurements, and translated the results into reactor-design recommendations with cross-functional collaborators.",
     heroImage: { src: "/research/plasma/hero.webp", alt: "Graphical summary of microwave plasma reactor modelling and forced-jet quenching", caption: "From validated reactor-scale CFD to forced-quenching design: temperature, flow and NO chemistry resolved in three dimensions." },
     figures: [
       { title: "Reactor and measurement schematic", src: "/research/plasma/reactor-schematic.webp", alt: "Microwave plasma reactor and optical measurement arrangement", caption: "Experimental reactor and diagnostic arrangement used to anchor the CFD model." },
       { title: "Temperature validation", src: "/research/plasma/temperature-validation.webp", alt: "Comparison of simulated and experimental plasma temperature profiles", caption: "Axial temperature predictions compared with experiments at multiple radial locations." },
-      { title: "Intrinsic plasma fields", src: "/research/plasma/intrinsic-fields.webp", alt: "Temperature and nitric oxide fields in the intrinsic-quenching reactor", caption: "Resolved temperature and NO fields reveal spatially distinct formation and destruction regions." },
-      { title: "Forced-quenching performance", src: "/research/plasma/quenching-performance.webp", alt: "NO yield per energy input for baseline and forced-quenching configurations", caption: "Forced jets preserve NO after the plasma zone and improve the predicted energy-yield trade-off." },
+      { title: "Intrinsic-quenching net production rate", src: "/research/plasma/intrinsic-fields.webp", alt: "Net rate of production field in the intrinsic-quenching reactor, in kmol per cubic metre per second", caption: "The contour shows the net species production-rate field [kmol/m³·s] in the intrinsic-quenching reactor." },
+      { title: "Axial nitric-oxide molar-flow comparison", src: "/research/plasma/quenching-performance.webp", alt: "Nitric-oxide molar flow versus axial position for non-quenching at 20 SLM and forced quenching at 10 plus 10 SLM", caption: "The curves compare axial NO molar flow for the 20 SLM non-quenching case and the 10+10 SLM forced-quenching case, with jet injection at x/D = 8. The source figure labels 54.3% as the potential maximum quenching efficiency." },
     ],
     coupling: {
       completed: "A one-way/manual workflow connecting ANSYS HFSS and ANSYS Fluent has been implemented, providing a foundation for electromagnetic-CFD analysis.",
       ongoing: "Iterative two-way coupling using temperature-dependent plasma properties and Python/PyFluent automation remain in development. The automated coupled loop is not yet demonstrated and validated.",
       note: "This workflow is a separate extension to the plasma work, not the method used to obtain the published 2024 and 2026 results presented above.",
     },
-    publications: [{ title: "Analysis of a Plasma Reactor Performance for Direct Nitrogen Fixation by Use of Three-Dimensional Simulations and Experiments", journal: "Chemical Engineering Journal 497, 154756", year: "2024" }, { title: "Analysis of Forced and Intrinsic Quenching in a Plasma Reactor for Nitrogen Fixation by Use of Three-Dimensional Simulations and Experiments", journal: "Chemical Engineering Journal 543, 178575", year: "2026" }],
+    publications: [{ title: "Analysis of a Plasma Reactor Performance for Direct Nitrogen Fixation by Use of Three-Dimensional Simulations and Experiments", journal: "Chemical Engineering Journal 497, 154756", year: "2024", doi: "10.1016/j.cej.2024.154756" }, { title: "Analysis of Forced and Intrinsic Quenching in a Plasma Reactor for Nitrogen Fixation by Use of Three-Dimensional Simulations and Experiments", journal: "Chemical Engineering Journal 543, 178575", year: "2026", doi: "10.1016/j.cej.2026.178575" }],
   },
   {
     slug: "bubble-breakup-les-vof", index: "02", title: "Bubble and Droplet Breakup in Turbulent Flows", shortTitle: "Bubble and Droplet Breakup", discipline: "Multiphase · LES-VOF · HPC · Validation",
@@ -94,9 +94,8 @@ export const projects: Project[] = [
     heroImage: { src: "/research/bubble/hero.webp", alt: "Graphical summary of internal stress and velocity during turbulent bubble breakup", caption: "Interface-resolving LES-VOF exposes the internal velocity and stress fields that precede neck collapse." },
     figures: [
       { title: "Adaptive interface mesh", src: "/research/bubble/adaptive-mesh.webp", alt: "Adaptive computational mesh around deforming bubble interfaces", caption: "Adaptive refinement tracks deformation and neck formation down to a local resolution of d₀/100." },
-      { title: "Experiment-simulation comparison", src: "/research/bubble/experiment-simulation.webp", alt: "Matched experimental and simulated turbulent bubble breakup sequences", caption: "High-speed experiments and LES-VOF show comparable deformation paths and daughter formation." },
-      { title: "Internal redistribution flow", src: "/research/bubble/internal-flow.webp", alt: "Velocity vectors and contours inside a deforming bubble before breakup", caption: "Internal liquid redistribution accelerates sharply as the neck approaches collapse." },
-      { title: "Daughter-size distribution", src: "/research/bubble/daughter-size.webp", alt: "Measured and simulated daughter-bubble size distributions", caption: "Predicted daughter-size distributions reproduce the experimentally observed breakup outcome." },
+      { title: "Experimental breakup sequences", src: "/research/bubble/experiment-simulation.webp", alt: "Photographic high-speed sequences of turbulent bubble breakup", caption: "High-speed photographs record the bubble deformation and breakup sequence." },
+      { title: "Internal redistribution flow", src: "/research/bubble/internal-flow.webp", alt: "Velocity vectors and contours inside a deforming bubble before breakup", caption: "The internal redistribution flow accelerates as the neck approaches collapse." },
     ],
     conference: {
       title: "Comparing Bubble and Droplet Breakup Mechanisms",
@@ -121,14 +120,14 @@ export const projects: Project[] = [
         { year: "2024", title: "Mechanistic Studies on Bubble and Droplet Dynamics in Turbulent Flows", event: "ISCRE 28, Finland", authors: "Vikash Vashisth and Ronnie Andersson" }
       ]
     },
-    publications: [{ title: "Dynamics of Bubble Breakup Under Turbulent Flow Conditions", journal: "Chemical Engineering Journal 511, 162019", year: "2025" }],
+    publications: [{ title: "Dynamics of Bubble Breakup Under Turbulent Flow Conditions", journal: "Chemical Engineering Journal 511, 162019", year: "2025", doi: "10.1016/j.cej.2025.162019" }],
   },
   {
     slug: "shear-thinning-rivulet", index: "03", title: "Gravity-Driven Shear-Thinning Rivulet Flow", shortTitle: "Shear-Thinning Rivulet Flow", discipline: "Non-Newtonian · Free surface · VOF · Industrial process CFD",
     summary: "An experimental-numerical investigation of wetting, fingering instability and gravity-driven transport of formulated shear-thinning liquids on inclined surfaces.",
     question: "Can a 3D free-surface model predict the unstable spreading and wetting footprint of formulated shear-thinning fluids across changing inclinations?",
     approach: ["Three-dimensional VOF model for gravity-driven free-surface transport", "Cross-type rheology fitted to measured shear-thinning properties", "Contact-line, surface-tension and inclination effects", "Experimental comparison of wetted area, front length and flow morphology", "Process-focused collaboration with Reckitt Benckiser during the IIT Guwahati appointment"],
-    evidence: [{ value: "3D VOF", label: "interface-resolving framework" }, { value: "80%", label: "experimental data closely represented" }, { value: "Exp. + CFD", label: "paired validation methodology" }, { value: "Non-Newtonian", label: "measured rheology included" }],
+    evidence: [{ value: "3D VOF", label: "interface-resolving framework" }, { value: "Exp. + CFD", label: "paired validation methodology" }, { value: "Non-Newtonian", label: "measured rheology included" }],
     outcomes: ["Reproduced the evolution of gravity-driven rivulet morphology and fingering behaviour.", "Compared simulated and measured wetted area and propagation length across formulations.", "Assessed how plate inclination changes spreading, instability and wettability.", "Demonstrated a transferable workflow for coating, cleaning, film-flow and formulated-product applications."],
     contribution: "Developed the transient 3D VOF model, coupled interface transport with measured non-Newtonian rheology, established mesh independence, validated predictions against experiments and delivered technical findings and process-optimisation recommendations for the IIT Guwahati-Reckitt Benckiser collaboration.",
     heroImage: { src: "/research/rivulet/hero.webp", alt: "Side-by-side CFD and experimental gravity-driven shear-thinning rivulet profiles", caption: "Direct comparison of the predicted and observed free-surface instability for a formulated shear-thinning liquid." },
@@ -139,7 +138,7 @@ export const projects: Project[] = [
       { title: "Quantitative experiment-CFD validation", src: "/research/rivulet/quantitative-validation.webp", alt: "Experimental and numerical comparisons of covered area and propagation length", caption: "Predicted wetted area and propagation length were evaluated against measurements across operating conditions." },
       { title: "Formulation-dependent flow profiles", src: "/research/rivulet/formulation-profiles.webp", alt: "Predicted rivulet profiles for four shear-thinning liquid formulations", caption: "Distinct formulations produce different spreading footprints and fingering patterns under otherwise comparable conditions." },
     ],
-    publications: [{ title: "Experimental and Numerical Validation on Instability of Gravity-Driven Shear Thinning Fluid", journal: "Lecture Notes in Mechanical Engineering", year: "2023" }],
+    publications: [{ title: "Experimental and Numerical Validation on Instability of Gravity-Driven Shear Thinning Fluid", journal: "Lecture Notes in Mechanical Engineering", year: "2023", doi: "10.1007/978-981-97-6776-2_35" }],
   },
   {
     slug: "rotor-stator-mixer", index: "04", title: "Rotor-Stator Mixer Modelling & Design", shortTitle: "Rotor-Stator Mixer Design", discipline: "Rotating machinery · LES/RANS · Mixing · Scale-up",
@@ -154,7 +153,7 @@ export const projects: Project[] = [
       { title: "Mixer-head geometry family", src: "/research/mixer/geometries.webp", alt: "Developed rotor-stator head and alternative circular, fine-hole and slotted stators", caption: "The geometry study compares opening size, shape and distribution while retaining the same mixer architecture." },
       { title: "Sliding-mesh resolution", src: "/research/mixer/mesh.webp", alt: "Computational mesh around the rotor, stator and sliding interface", caption: "Local refinement resolves the rotor-stator gap, stator openings and transient rotating interface." },
       { title: "Turbulent dissipation structures", src: "/research/mixer/dissipation.webp", alt: "Three-dimensional turbulent dissipation structures around rotor-stator mixer heads", caption: "High-dissipation structures identify where the mixer concentrates deformation and energy input." },
-      { title: "Residence-time distribution", src: "/research/mixer/rtd.webp", alt: "Tracer residence-time histories at monitoring locations and rotational speeds", caption: "Tracer histories quantify circulation delay, short-time response and the approach to uniformity." },
+      { title: "Tracer mass-fraction histories", src: "/research/mixer/rtd.webp", alt: "Tracer mass fraction versus flow time at monitoring locations and rotational speeds", caption: "Tracer mass fraction is plotted against flow time for multiple monitoring locations and rotor speeds." },
     ],
     videos: [
       { title: "Tracer release case A", src: "/research/mixer/tracer-case-1.mp4", poster: "/research/mixer/tracer-case-1-poster.jpg", caption: "Side-by-side transient transport through circular-hole, fine-hole and slotted stators for a tracer introduced near the mixer level." },
@@ -210,15 +209,15 @@ export const projects: Project[] = [
       contribution: "My contribution: Shared responsibility for conceptualization and led methodology, validation and formal analysis across both studies. I conducted the ultrasonication investigation and visualization and wrote the original drafts of both manuscripts.",
       recordLabel: "Related experimental publications",
       citations: [
-        { year: "2022", title: "Nanoparticle De-agglomeration in Viscous Fluids Using Different High Shear Mixer Geometries", event: "Chemical Engineering Science 248, 117132", authors: "Vikash Vashisth, K.D.P. Nigam and Vimal Kumar" },
-        { year: "2020", title: "Ultrasonic-Assisted De-agglomeration and Power Draw Characterization of Silica Nanoparticles", event: "Ultrasonics Sonochemistry 65, 105061", authors: "Vikash and Vimal Kumar" }
+        { year: "2022", title: "Nanoparticle De-agglomeration in Viscous Fluids Using Different High Shear Mixer Geometries", event: "Chemical Engineering Science 248, 117132", authors: "Vikash Vashisth, K.D.P. Nigam and Vimal Kumar", doi: "10.1016/j.ces.2021.117132" },
+        { year: "2020", title: "Ultrasonic-Assisted De-agglomeration and Power Draw Characterization of Silica Nanoparticles", event: "Ultrasonics Sonochemistry 65, 105061", authors: "Vikash and Vimal Kumar", doi: "10.1016/j.ultsonch.2020.105061" }
       ]
     },
     publications: [
-      { title: "Hydrodynamics and Mixing Characterization in a Novel High Shear Mixer", journal: "Chemical Engineering and Processing 120, 57-67", year: "2017" },
-      { title: "Turbulent Statistics of Flow Fields Using Large Eddy Simulations in Batch High Shear Mixers", journal: "Chemical Engineering Research and Design 147, 561-569", year: "2019" },
-      { title: "Design and Development of High Shear Mixers: Fundamentals, Applications and Recent Progress", journal: "Chemical Engineering Science 232, 116296", year: "2021" },
-      { title: "Effect of Stator Geometries on Flow Fields and Mixing Performance for Viscous Fluids", journal: "Chemical Engineering and Processing 180, 108595", year: "2022" },
+      { title: "Hydrodynamics and Mixing Characterization in a Novel High Shear Mixer", journal: "Chemical Engineering and Processing 120, 57-67", year: "2017", doi: "10.1016/j.cep.2017.06.008" },
+      { title: "Turbulent Statistics of Flow Fields Using Large Eddy Simulations in Batch High Shear Mixers", journal: "Chemical Engineering Research and Design 147, 561-569", year: "2019", doi: "10.1016/j.cherd.2019.05.045" },
+      { title: "Design and Development of High Shear Mixers: Fundamentals, Applications and Recent Progress", journal: "Chemical Engineering Science 232, 116296", year: "2021", doi: "10.1016/j.ces.2020.116296" },
+      { title: "Effect of Stator Geometries on Flow Fields and Mixing Performance for Viscous Fluids", journal: "Chemical Engineering and Processing 180, 108595", year: "2022", doi: "10.1016/j.cep.2021.108595" },
     ],
   },
 ];
@@ -387,11 +386,10 @@ if (!eduProject) {
 const eduPortfolioStudy: NonNullable<Project["portfolioStudy"]> = {
   status: "Completed independent engineering study",
   objective:
-    "How can a helical cooling jacket reduce stator temperature without imposing excessive pressure loss? At the reference flow, more channel turns improve cooling while increasing pressure loss; fewer turns reduce the hydraulic penalty but leave the stator warmer. Selection depends on the thermal and hydraulic requirements.",
+    "A helical cooling jacket must remove stator heat without imposing excessive pressure loss. I compared channel-turn count and operating flow to quantify the thermal–hydraulic trade-off.",
   contribution:
     "I built the parameterized three-body CAD in Siemens Designcenter/NX, prepared the conjugate-heat-transfer models, and studied mesh sensitivity, flow rate, channel diameter and helix pitch. I developed assisted STAR-CCM+ extraction and PyFluent CAD-to-results workflows for setup checks, checkpoint recovery, conservation reports and standardized exports; multi-case exploration was not fully automated.",
   scope: [
-    "Steady conjugate heat transfer couples coolant flow to conduction through the housing and an equivalent stator.",
     "Compared the six-turn reference geometry with five- and seven-turn channels at 0.110 kg/s, and evaluated flow rates from 0.088 to 0.132 kg/s.",
     "Compared the STAR-CCM+ reference with a separately configured ANSYS Fluent baseline.",
   ],
@@ -447,13 +445,11 @@ const eduPortfolioStudy: NonNullable<Project["portfolioStudy"]> = {
       "Design",
       "Flow (kg/s)",
       "Peak stator temperature (K)",
-      "Coolant outlet temperature (K)",
       "Total pressure drop (Pa)",
       "Hydraulic power (W)",
-      "Energy imbalance (%)",
     ],
     rows: [
-      ["Six-turn reference design", "0.110", "466.2", "350.74", "3,208", "0.341", "0.00181"],
+      ["Six-turn reference design", "0.110", "466.2", "3,208", "0.341"],
     ],
   },
   meshComparison: {
@@ -469,31 +465,27 @@ const eduPortfolioStudy: NonNullable<Project["portfolioStudy"]> = {
       "Case",
       "Flow (kg/s)",
       "Stator max (K)",
-      "Outlet (K)",
       "Total Δp (Pa)",
       "Hydraulic power (W)",
-      "Energy error (%)",
     ],
     rows: [
-      ["Low", "0.088", "470.1", "353.88", "2,257", "0.192", "0.0154"],
-      ["Six-turn reference", "0.110", "466.2", "350.74", "3,208", "0.341", "0.00181"],
-      ["High", "0.132", "463.4", "348.64", "4,312", "0.549", "0.0111"],
+      ["Low", "0.088", "470.1", "2,257", "0.192"],
+      ["Six-turn reference", "0.110", "466.2", "3,208", "0.341"],
+      ["High", "0.132", "463.4", "4,312", "0.549"],
     ],
   },
   pitch: {
     headers: [
       "Design",
-      "Turns",
       "Pitch (mm)",
       "Stator max (K)",
       "Total Δp (Pa)",
       "Hydraulic power (W)",
-      "Relative to reference",
     ],
     rows: [
-      ["Six-turn reference design", "6", "30", "466.2", "3,208", "0.341", "Reference"],
-      ["Five-turn cooling channel", "5", "36", "468.1", "2,681", "0.285", "1.9 K warmer; 16.4% lower pressure drop"],
-      ["Seven-turn cooling channel", "7", "25.7", "464.8", "3,727", "0.396", "1.4 K cooler; 16.2% higher pressure drop"],
+      ["Six-turn reference design", "30", "466.2", "3,208", "0.341"],
+      ["Five-turn cooling channel", "36", "468.1", "2,681", "0.285"],
+      ["Seven-turn cooling channel", "25.7", "464.8", "3,727", "0.396"],
     ],
   },
   solverComparison: {
@@ -507,6 +499,7 @@ const eduPortfolioStudy: NonNullable<Project["portfolioStudy"]> = {
     "The Medium mesh is used as the intermediate comparison baseline. Production-to-Medium changes were 0.226 K in peak temperature and 0.426% in total pressure drop; Medium-to-Fine changes were 0.148 K and 1.003%, respectively.",
     "This mesh-independence assessment is non-monotonic and does not establish that all fields are mesh independent. The Medium-to-Fine pressure-drop change is slightly above the provisional 1% check.",
     "For the Medium mesh, energy imbalance is 0.00181% and signed mass imbalance is −6.18 × 10⁻⁸ kg/s.",
+    "Across the low, reference and high flow cases, energy imbalance was 0.0154%, 0.00181% and 0.0111%, respectively.",
   ],
   limitations: [
     "No approved maximum stator temperature or hydraulic/pumping budget is established; design selection remains conditional on those requirements.",
@@ -516,9 +509,9 @@ const eduPortfolioStudy: NonNullable<Project["portfolioStudy"]> = {
     {
       title: "Six-turn reference geometry",
       src: "/research/edu/geometry.png",
-      alt: "Electric-drive housing and stator with a six-turn helical coolant channel and inlet and outlet ports",
+      alt: "Electric-drive housing, homogenized stator and six-turn helical coolant channel",
       caption:
-        "Parameterized housing, stator and six-turn coolant channel at 30 mm pitch. This is the reference geometry, distinct from the Medium computational mesh.",
+        "Parameterized housing, homogenized stator and six-turn coolant channel at 30 mm pitch. This reference geometry is distinct from the Medium computational mesh.",
     },
     {
       title: "Flow-rate thermal–hydraulic comparison",
@@ -535,11 +528,11 @@ const eduPortfolioStudy: NonNullable<Project["portfolioStudy"]> = {
         "Peak stator temperature and total pressure drop for the six-turn reference and five- and seven-turn channels at 0.110 kg/s.",
     },
     {
-      title: "Reference-design solid-surface temperature",
+      title: "Stator temperature distribution · six-turn reference",
       src: "/research/edu/Medium_Solid_Temperature.png",
       alt: "Solid-surface temperature contour for the housing and homogenized stator in the STAR-CCM+ Medium baseline",
       caption:
-        "Housing and homogenized-stator solid-surface temperatures for the six-turn reference at 0.110 kg/s on the Medium mesh.",
+        "The STAR-CCM+ scene titled “Stator Temperature Distribution” shows the housing and homogenized-stator surfaces for the six-turn reference at 0.110 kg/s on the Medium mesh.",
     },
     {
       title: "Six-turn reference · coolant static pressure",
@@ -610,10 +603,10 @@ Object.assign(eduProject, {
   outcomes: [],
 });
 
-export const featuredPublications = [
-  ["2026", "Analysis of Forced and Intrinsic Quenching in a Plasma Reactor for Nitrogen Fixation", "Chemical Engineering Journal"],
-  ["2025", "Dynamics of Bubble Breakup Under Turbulent Flow Conditions", "Chemical Engineering Journal"],
-  ["2024", "Analysis of a Plasma Reactor Performance for Direct Nitrogen Fixation", "Chemical Engineering Journal"],
-  ["2023", "Experimental and Numerical Validation on Instability of Gravity-Driven Shear Thinning Fluid", "Lecture Notes in Mechanical Engineering"],
-  ["2022", "Effect of Stator Geometries on Flow Fields and Mixing Performance for Viscous Fluids", "Chemical Engineering and Processing"],
+export const featuredPublications: [string, string, string, string?][] = [
+  ["2026", "Analysis of Forced and Intrinsic Quenching in a Plasma Reactor for Nitrogen Fixation", "Chemical Engineering Journal", "10.1016/j.cej.2026.178575"],
+  ["2025", "Dynamics of Bubble Breakup Under Turbulent Flow Conditions", "Chemical Engineering Journal", "10.1016/j.cej.2025.162019"],
+  ["2024", "Analysis of a Plasma Reactor Performance for Direct Nitrogen Fixation", "Chemical Engineering Journal", "10.1016/j.cej.2024.154756"],
+  ["2023", "Experimental and Numerical Validation on Instability of Gravity-Driven Shear Thinning Fluid", "Lecture Notes in Mechanical Engineering", "10.1007/978-981-97-6776-2_35"],
+  ["2022", "Effect of Stator Geometries on Flow Fields and Mixing Performance for Viscous Fluids", "Chemical Engineering and Processing", "10.1016/j.cep.2021.108595"],
 ];

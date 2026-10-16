@@ -102,7 +102,7 @@ export default function Home() {
 
       <section id="publications" className="section-shell block-section">
         <div className="section-heading"><div><p className="eyebrow">03 / Technical record</p><h2>Selected Publications</h2></div><p>Recent publications, 2022-2026, supporting the methods, physical insights and results presented in this portfolio.</p></div>
-        <div className="publication-list">{featuredPublications.map(([year, title, journal], i) => <article key={title}><span>{year}</span><h3>{title}</h3><p>{journal}</p><b aria-hidden="true">{String(i + 1).padStart(2, "0")}</b></article>)}</div>
+        <div className="publication-list">{featuredPublications.map(([year, title, journal, doi], i) => <article key={title}><span>{year}</span><h3>{doi ? <a className="publication-doi-link" href={`https://doi.org/${doi}`} target="_blank" rel="noreferrer">{title} ↗</a> : title}</h3><p>{journal}</p><b aria-hidden="true">{String(i + 1).padStart(2, "0")}</b></article>)}</div>
         <div className="publication-footer"><a className="text-link" href="https://scholar.google.co.in/citations?user=JfO8GY8AAAAJ&hl=en" target="_blank" rel="noreferrer">View all publications on Google Scholar <span aria-hidden="true">↗</span></a></div>
       </section>
 

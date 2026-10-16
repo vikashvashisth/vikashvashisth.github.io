@@ -12,7 +12,7 @@ function CaseFeature({feature,variant="conference"}:{feature:NonNullable<Project
       <div className="conference-evidence">{feature.evidence.map(({value,label})=><div key={label}><strong>{value}</strong><span>{label}</span></div>)}</div>
       <div className="conference-figures">{feature.figures.map(item=><figure key={item.title}><a className="research-figure-link" href={item.src} target="_blank" rel="noreferrer" aria-label={`Open full-size figure: ${item.title} (new tab)`}><img src={item.src} alt={item.alt}/></a><figcaption><strong>{item.title}</strong><span>{item.caption}</span><a className="figure-fullsize" href={item.src} target="_blank" rel="noreferrer">Open full-size figure <span aria-hidden="true">↗</span><span className="sr-only"> (new tab)</span></a></figcaption></figure>)}</div>
       {feature.contribution && <p className="conference-contribution">{feature.contribution}</p>}
-      <div className="conference-citation"><p className="eyebrow">{"recordLabel" in feature && feature.recordLabel ? feature.recordLabel : "Conference presentation"}</p><div className="conference-records">{feature.citations.map(item=><article key={`${item.event}-${item.title}`}><span>{item.year}</span><div><h3>{item.title}</h3><p>{item.event}</p><p>{item.authors}</p></div></article>)}</div></div>
+      <div className="conference-citation"><p className="eyebrow">{"recordLabel" in feature && feature.recordLabel ? feature.recordLabel : "Conference presentation"}</p><div className="conference-records">{feature.citations.map(item=><article key={`${item.event}-${item.title}`}><span>{item.year}</span><div><h3>{item.doi ? <a className="publication-doi-link" href={`https://doi.org/${item.doi}`} target="_blank" rel="noreferrer">{item.title} ↗</a> : item.title}</h3><p>{item.event}</p><p>{item.authors}</p></div></article>)}</div></div>
     </div>
   </section>;
 }
@@ -22,11 +22,16 @@ function ResultsTable({headers,rows,label}:{headers:string[];rows:string[][];lab
 }
 
 function PortfolioStudy({study}:{study:NonNullable<Project["portfolioStudy"]>}){
+  const [geometryFigure, ...designFigures] = study.figures;
   return <div className="edu-study">
     <section className="edu-study-section section-shell" aria-labelledby="edu-objective">
       <p className="eyebrow">{study.status}</p><h2 id="edu-objective">1. Engineering objective and contribution</h2>
       <p className="edu-study-lead">{study.objective}</p>
       <h3>My contribution</h3><p>{study.contribution}</p>
+      {geometryFigure && <div className="figure-grid edu-figure-grid"><figure>
+        <a className="research-figure-link" href={geometryFigure.src} target="_blank" rel="noreferrer" aria-label={`Open full-size figure: ${geometryFigure.title} (new tab)`}><img src={geometryFigure.src} alt={geometryFigure.alt}/></a>
+        <figcaption><strong>{geometryFigure.title}</strong><span>{geometryFigure.caption}</span><a className="figure-fullsize" href={geometryFigure.src} target="_blank" rel="noreferrer">Open full-size figure ↗</a></figcaption>
+      </figure></div>}
     </section>
     <section className="edu-study-section edu-study-muted" aria-labelledby="edu-scope">
       <div className="section-shell"><h2 id="edu-scope">2. Model and assumptions</h2>
@@ -40,7 +45,7 @@ function PortfolioStudy({study}:{study:NonNullable<Project["portfolioStudy"]>}){
     </section>
     <section className="edu-study-section section-shell" aria-labelledby="edu-baseline">
       <h2 id="edu-baseline">3. Six-turn reference performance</h2>
-      <p>The six-turn cooling channel at 30 mm pitch is the reference design. Its modeled peak temperature is 466.2 K (193.1 °C), the maximum in the homogenized stator; it is not a winding temperature. Production, Medium and Fine are mesh resolutions of this same geometry, not separate designs.</p>
+      <p>The six-turn cooling channel at 30 mm pitch is the reference design. Its modeled peak temperature is 466.2 K (193.1 °C), the maximum in the homogenized stator rather than a winding temperature. Production, Medium and Fine are mesh resolutions of this same geometry, not separate designs.</p>
       <ResultsTable headers={study.baseline.headers} rows={study.baseline.rows} label="Six-turn reference design performance"/>
     </section>
     <section className="edu-study-section edu-study-muted" aria-labelledby="edu-tradeoffs">
@@ -49,11 +54,11 @@ function PortfolioStudy({study}:{study:NonNullable<Project["portfolioStudy"]>}){
         <p>Increasing flow from 0.110 to 0.132 kg/s lowers peak stator temperature by about 2.8 K, while total pressure drop rises by 34%. Hydraulic power increases from 0.341 to 0.549 W; this is fluid-side power, not pump electrical consumption.</p>
         <ResultsTable headers={study.flow.headers} rows={study.flow.rows} label="STAR-CCM+ flow-rate study"/>
         <h3>Cooling-channel turns · 0.110 kg/s</h3>
-        <p>The five-turn channel trades a warmer stator for lower pressure loss; the seven-turn channel trades greater pressure loss for a cooler stator. Neither is an unconditional optimum.</p>
+        <p>The five-turn channel has a warmer stator and lower pressure loss; the seven-turn channel has a cooler stator and greater pressure loss.</p>
         <ResultsTable headers={study.pitch.headers} rows={study.pitch.rows} label="Cooling-channel turn comparison"/>
         <h3>Design and flow fields</h3>
         <p>The aligned plots compare peak stator temperature and total pressure drop. The contours show the reference geometry's temperature and static-pressure fields; total pressure drop is quantified in the table above.</p>
-        <div className="figure-grid edu-figure-grid">{study.figures.map((item)=><figure key={item.title}>
+        <div className="figure-grid edu-figure-grid">{designFigures.map((item)=><figure key={item.title}>
           <a className="research-figure-link" href={item.src} target="_blank" rel="noreferrer" aria-label={`Open full-size figure: ${item.title} (new tab)`}><img src={item.src} alt={item.alt}/></a>
           <figcaption><strong>{item.title}</strong><span>{item.caption}</span><a className="figure-fullsize" href={item.src} target="_blank" rel="noreferrer">Open full-size figure ↗</a></figcaption>
         </figure>)}</div>
@@ -91,7 +96,17 @@ export function generateStaticParams(){ return projects.map(({slug})=>({slug}));
 export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{
   const {slug}=await params;
   const project=projects.find(p=>p.slug===slug);
-  return project ? {title: `${project.shortTitle} | Vikash Vashisth | CFD Engineer`, description: project.summary} : {title: "Project not found | Vikash Vashisth | CFD Engineer"};
+  if (!project) return {title: "Project not found | Vikash Vashisth | CFD Engineer"};
+  const url = `/projects/${project.slug}/`;
+  const image = project.cardImage?.src ?? project.heroImage?.src ?? "/vikash-vashisth.webp";
+  const title = `${project.shortTitle} | Vikash Vashisth | CFD Engineer`;
+  return {
+    title,
+    description: project.summary,
+    alternates: { canonical: url },
+    openGraph: { type: "article", url, siteName: "Vikash Vashisth | CFD Engineer", title, description: project.summary, images: [{ url: image, alt: project.cardImage?.alt ?? project.heroImage?.alt ?? "Vikash Vashisth" }] },
+    twitter: { card: "summary_large_image", title, description: project.summary, images: [image] },
+  };
 }
 
 export default async function ProjectPage({params}:{params:Promise<{slug:string}>}){
@@ -120,7 +135,7 @@ export default async function ProjectPage({params}:{params:Promise<{slug:string}
     {project.collaboration && <CaseFeature feature={project.collaboration}/>} 
     {project.experimental && <CaseFeature feature={project.experimental} variant="experiment"/>}
     {!project.portfolioStudy && <section className="contribution section-shell"><p className="eyebrow">My contribution</p><p>{project.contribution}</p></section>}
-    {project.publications.length > 0 && <section className="case-publications section-shell"><p className="eyebrow">Related publications</p>{project.publications.map(pub=><article key={pub.title}><span>{pub.year}</span><div><h3>{pub.title}</h3><p>{pub.journal}</p></div></article>)}</section>}
+    {project.publications.length > 0 && <section className="case-publications section-shell"><p className="eyebrow">Related publications</p>{project.publications.map(pub=><article key={pub.title}><span>{pub.year}</span><div><h3>{pub.doi ? <a className="publication-doi-link" href={`https://doi.org/${pub.doi}`} target="_blank" rel="noreferrer">{pub.title} ↗</a> : pub.title}</h3><p>{pub.journal}</p></div></article>)}</section>}
     <a className="next-project" href={`/projects/${next.slug}/`}><span>Next case study</span><strong>{next.shortTitle} ↗</strong></a>
   </main>;
 }
