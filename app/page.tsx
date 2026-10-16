@@ -45,7 +45,7 @@ export default function Home() {
           <p className="hero-detail">My focus is on the mechanisms that determine performance: how turbulence drives mixing, how interfaces interact with turbulence, and how flow and heat transfer interact with chemical kinetics to govern reaction rates and product formation. Through detailed CFD analysis, I connect these local mechanisms to system performance.</p>
           <div className="hero-actions">
             <a className="button primary" href="#projects">Explore selected work <span aria-hidden="true">↗</span></a>
-            <a className="button secondary" href="/Vikash_Vashisth_CV.pdf?v=20261016-cv" download="Vikash_Vashisth_CV.pdf">Download industry CV <span aria-hidden="true">↓</span></a>
+            <a className="button secondary" href="/Vikash_Vashisth_CV.pdf?v=20261016-cv2" download="Vikash_Vashisth_CV.pdf">Download industry CV <span aria-hidden="true">↓</span></a>
           </div>
           <div className="hero-proof" aria-label="Experience and CFD workflow">
             <div><strong>9+</strong><span>years in CFD & multiphysics</span></div>
