@@ -18,3 +18,5 @@ incoming-edu/
 *.tsbuildinfo
 *-backup.*
 *-backup-*/
+
+incoming-bubble/

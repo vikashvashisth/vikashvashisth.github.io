@@ -381,3 +381,40 @@ footer>div:last-child { display: flex; flex-direction: column; gap: 8px; text-al
 .baseline-convergence .figure-grid { grid-template-columns: 1fr; }
 .baseline-convergence .figure-grid .research-figure-link img { height: auto; padding: 12px; }
 @media(max-width: 600px) { .baseline-results th, .baseline-results td { padding: 12px 10px; } }
+
+/* Restored review improvements: legible evidence, reserved media space and accessible controls. */
+.case-nav nav,.case-section-nav {display:flex;flex-wrap:wrap;gap:24px;align-items:center}
+.case-nav nav a {font-size:14px;padding:12px 0}
+.early-contribution {padding-top:0;padding-bottom:24px}
+.early-contribution>p:last-child,.case-assessment p,.hero-detail,.edu-study-section>p {max-width:820px}
+.case-section-nav {padding-top:8px;padding-bottom:24px;font-size:14px}
+.case-section-nav a,.case-nav nav a {text-underline-offset:5px}
+.figure-grid .research-figure-link img,.conference-figures img {height:auto;max-height:none;width:100%;object-fit:contain}
+.figure-wide {grid-column:1 / -1}
+.figure-wide>.research-figure-link {max-width:900px;margin:auto;width:100%}
+.annotated-media {display:block;width:100%;height:auto}
+.panel-reader {padding:20px;border-top:1px solid var(--line)}
+.panel-reader summary,.supporting-details summary,.breakup-animation-supporting summary {cursor:pointer;font-weight:600;padding:16px 0}
+.panel-reader p {color:var(--muted);font-size:14px}
+.panel-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.panel-grid svg {width:100%;height:auto;display:block;background:white}
+.panel-grid h3 {font-size:15px;margin-bottom:12px}
+.case-assessment {padding-top:24px;padding-bottom:40px}
+.case-assessment h2 {font-size:26px}
+.breakup-animations {padding-top:48px;padding-bottom:48px}
+.breakup-animation-featured {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin:24px 0}
+.breakup-animations figure {margin:0;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:white}
+.breakup-animations video,.case-videos video {width:100%;display:block;aspect-ratio:16 / 9;background:#142b3a;object-fit:contain}
+.breakup-animations figcaption {display:flex;flex-direction:column;gap:12px;padding:20px;font-size:15px;line-height:1.7}
+.breakup-animations figcaption span {color:var(--muted)}
+.supporting-details {margin-top:24px;margin-bottom:32px}
+.supporting-details .section-shell {width:100%}
+.table-scroll-hint {display:none;font-size:13px;color:var(--muted)}
+a:focus-visible,summary:focus-visible,video:focus-visible,[tabindex]:focus-visible {outline:3px solid #a54e00;outline-offset:4px}
+@media(max-width:700px){
+ .case-nav {gap:12px}.case-nav nav {gap:16px}.case-nav nav a{font-size:12px}
+ .breakup-animation-featured,.panel-grid {grid-template-columns:1fr}
+ .table-scroll-hint {display:block}.case-section-nav{gap:16px;font-size:13px}
+ .figure-grid .research-figure-link img {max-height:none}
+ .panel-reader {padding:12px}
+}

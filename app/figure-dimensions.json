@@ -1,0 +1,262 @@
+{
+  "/vikash-vashisth.webp": [
+    600,
+    600
+  ],
+  "/research/mixer/hero.webp": [
+    1755,
+    1200
+  ],
+  "/research/mixer/dissipation.webp": [
+    1112,
+    1200
+  ],
+  "/research/mixer/geometries.webp": [
+    1200,
+    745
+  ],
+  "/research/mixer/tracer-case-3-poster.jpg": [
+    1280,
+    412
+  ],
+  "/research/mixer/rtd.webp": [
+    1177,
+    900
+  ],
+  "/research/mixer/tracer-case-1-poster.jpg": [
+    1280,
+    404
+  ],
+  "/research/mixer/tracer-case-2-poster.jpg": [
+    1280,
+    402
+  ],
+  "/research/mixer/mesh.webp": [
+    1200,
+    738
+  ],
+  "/research/edu/Medium_Solid_Temperature.png": [
+    1920,
+    1080
+  ],
+  "/research/edu/geometry.png": [
+    1938,
+    1166
+  ],
+  "/research/edu/coolant-temperature.png": [
+    1920,
+    1080
+  ],
+  "/research/edu/energy-convergence.png": [
+    1920,
+    1080
+  ],
+  "/research/edu/mesh-detail.png": [
+    1920,
+    1080
+  ],
+  "/research/edu/flow-rate-comparison.png": [
+    2000,
+    1600
+  ],
+  "/research/edu/Medium_Static_Pressure.png": [
+    1920,
+    1080
+  ],
+  "/research/edu/Medium_Stator_Temperature_Convergence.png": [
+    1920,
+    1080
+  ],
+  "/research/edu/Medium_Wall_Yplus.png": [
+    1920,
+    1080
+  ],
+  "/research/edu/pressure.png": [
+    1920,
+    1080
+  ],
+  "/research/edu/solid-temperature.png": [
+    1920,
+    1080
+  ],
+  "/research/edu/temperature-convergence.png": [
+    1920,
+    1080
+  ],
+  "/research/edu/cutaway.png": [
+    1938,
+    1166
+  ],
+  "/research/edu/mesh.png": [
+    1920,
+    1080
+  ],
+  "/research/edu/Medium_Coolant_Boundary_Temperature.png": [
+    1920,
+    1080
+  ],
+  "/research/edu/Medium_Residual_Convergence.png": [
+    1920,
+    1080
+  ],
+  "/research/edu/helix-pitch-comparison.png": [
+    2000,
+    1600
+  ],
+  "/research/edu/Medium_Pressure_Drop_Convergence.png": [
+    1920,
+    1080
+  ],
+  "/research/edu/pressure-convergence.png": [
+    1920,
+    1080
+  ],
+  "/research/rivulet/quantitative-validation.webp": [
+    775,
+    900
+  ],
+  "/research/rivulet/hero.webp": [
+    1800,
+    924
+  ],
+  "/research/rivulet/experimental-setup.webp": [
+    1200,
+    802
+  ],
+  "/research/rivulet/card-combined.webp": [
+    1600,
+    800
+  ],
+  "/research/rivulet/formulation-profiles.webp": [
+    1200,
+    333
+  ],
+  "/research/rivulet/mesh.webp": [
+    1200,
+    399
+  ],
+  "/research/bubble/hero.webp": [
+    1800,
+    972
+  ],
+  "/research/bubble/daughter-size.webp": [
+    1200,
+    485
+  ],
+  "/research/bubble/internal-flow.webp": [
+    1200,
+    400
+  ],
+  "/research/bubble/experiment-simulation.webp": [
+    1200,
+    470
+  ],
+  "/research/bubble/adaptive-mesh.webp": [
+    1200,
+    381
+  ],
+  "/research/plasma/hero.webp": [
+    1800,
+    706
+  ],
+  "/research/plasma/intrinsic-fields.webp": [
+    1200,
+    374
+  ],
+  "/research/plasma/temperature-validation.webp": [
+    774,
+    620
+  ],
+  "/research/plasma/reactor-schematic.webp": [
+    1200,
+    489
+  ],
+  "/research/plasma/quenching-performance.webp": [
+    1176,
+    900
+  ],
+  "/research/mixer/chisa/rotor-speed-flow-patterns.webp": [
+    1211,
+    548
+  ],
+  "/research/mixer/chisa/blending-validation.webp": [
+    980,
+    450
+  ],
+  "/research/mixer/chisa/turbulent-kinetic-energy.webp": [
+    952,
+    481
+  ],
+  "/research/mixer/chisa/viscosity-flow-patterns.webp": [
+    1222,
+    537
+  ],
+  "/research/mixer/nanoparticle/power-performance.webp": [
+    1800,
+    686
+  ],
+  "/research/mixer/nanoparticle/rheology-transition.webp": [
+    1400,
+    1096
+  ],
+  "/research/mixer/nanoparticle/experimental-systems.webp": [
+    1800,
+    1037
+  ],
+  "/research/mixer/nanoparticle/erosion-microscopy.webp": [
+    1774,
+    1368
+  ],
+  "/research/mixer/nanoparticle/particle-size-outcomes.webp": [
+    1800,
+    626
+  ],
+  "/research/bubble/iscre/turbulence-interface-interaction.webp": [
+    1800,
+    1007
+  ],
+  "/research/bubble/iscre/breakup-comparison.webp": [
+    1800,
+    1059
+  ],
+  "/research/bubble/iscre/pressure-comparison.webp": [
+    1640,
+    640
+  ],
+  "/research/bubble/iscre/internal-flow.webp": [
+    1715,
+    651
+  ],
+  "/research/bubble/iscre/behavior-map.webp": [
+    1400,
+    667
+  ],
+  "/research/bubble/animations/fragment-closeup.webp": [
+    1838,
+    903
+  ],
+  "/research/bubble/animations/fragment-transport.webp": [
+    1838,
+    903
+  ],
+  "/research/bubble/animations/bubble-front-close.webp": [
+    1840,
+    540
+  ],
+  "/research/bubble/animations/thread-formation.webp": [
+    1838,
+    874
+  ],
+  "/research/bubble/animations/interface-separation.webp": [
+    1838,
+    974
+  ],
+  "/research/bubble/animations/octanol-thread-fragments.webp": [
+    1280,
+    700
+  ],
+  "/research/bubble/animations/interface-closeup.webp": [
+    1838,
+    974
+  ]
+}

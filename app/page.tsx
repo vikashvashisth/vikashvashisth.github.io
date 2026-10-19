@@ -41,8 +41,8 @@ export default function Home() {
         <div className="hero-copy">
           <p className="eyebrow">CFD Engineer <span aria-hidden="true">/</span> Gothenburg, Sweden</p>
           <h1 id="hero-title">Advanced CFD <span>for Multiphase, Reacting, and Thermal-Fluid Systems</span></h1>
-          <p className="lede"><strong>Validated high-fidelity CFD grounded in experimental evidence and physical understanding.</strong></p>
-          <p className="hero-detail">My focus is on the mechanisms that determine performance: how turbulence drives mixing, how interfaces interact with turbulence, and how flow and heat transfer interact with chemical kinetics to govern reaction rates and product formation. Through detailed CFD analysis, I connect these local mechanisms to system performance.</p>
+          <p className="lede"><strong>CFD grounded in physical understanding, numerical verification and experimental evidence.</strong></p>
+          <p className="hero-detail">I use CFD to evaluate thermal performance, pressure losses, mixing and reacting or multiphase flows, connecting model assumptions and experimental evidence to engineering decisions.</p>
           <div className="hero-actions">
             <a className="button primary" href="#projects">Explore selected work <span aria-hidden="true">↗</span></a>
             <a className="button secondary" href="/Vikash_Vashisth_CV.pdf?v=20261019-cv" download="Vikash_Vashisth_CV.pdf">Download industry CV <span aria-hidden="true">↓</span></a>
@@ -84,7 +84,7 @@ export default function Home() {
         <div className="section-heading"><div><p className="eyebrow">Further experience</p><h2>Coupled Thermal-Flow Analysis</h2></div></div>
         <article className="supporting-project">
           <div className="supporting-project-intro"><span>Heat transfer · Radiation · Process equipment</span><h3>Mixed Convective and Radiative Heat Transfer in Spiral-Coiled Tubes</h3><p>Numerical analysis of turbulent convection coupled with thermal radiation in compact spiral-coiled heat exchangers for high-temperature heat recovery.</p></div>
-          <div className="supporting-project-details"><div><small>Models</small><strong>RNG k-ε + P-1 radiation</strong></div><div><small>Parameter space</small><strong>Re 10,000-100,000</strong></div><div><small>Key result</small><strong>≈10% heat-transfer enhancement with radiation</strong></div></div>
+          <div className="supporting-project-details"><div><small>Models</small><strong>RNG k-ε + P-1 radiation</strong></div><div><small>Parameter space</small><strong>Re 10,000-100,000</strong></div><div><small>Engineering question</small><strong>Radiation contribution to heat transfer</strong></div></div>
           <div className="supporting-project-footer"><p>Examined the influence of curvature ratio, wall emissivity and optical thickness on heat-transfer performance.</p><a href="https://doi.org/10.1115/1.4043946" target="_blank" rel="noreferrer">View publication ↗</a></div>
         </article>
       </section>
