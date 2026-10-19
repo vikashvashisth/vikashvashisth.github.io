@@ -42,7 +42,7 @@ export default function Home() {
           <p className="eyebrow">CFD Engineer <span aria-hidden="true">/</span> Gothenburg, Sweden</p>
           <h1 id="hero-title">Advanced CFD <span>for Multiphase, Reacting, and Thermal-Fluid Systems</span></h1>
           <p className="lede"><strong>CFD grounded in physical understanding, numerical verification and experimental evidence.</strong></p>
-          <p className="hero-detail">I use CFD to evaluate thermal performance, pressure losses, mixing and reacting or multiphase flows, connecting model assumptions and experimental evidence to engineering decisions.</p>
+          <p className="hero-detail">I use CFD to investigate performance limitations and evaluate design improvements, combining fluid mechanics, heat transfer and multiphysics analysis. My engineering assessments draw on physical interpretation, numerical verification and experimental evidence.</p>
           <div className="hero-actions">
             <a className="button primary" href="#projects">Explore selected work <span aria-hidden="true">↗</span></a>
             <a className="button secondary" href="/Vikash_Vashisth_CV.pdf?v=20261019-cv" download="Vikash_Vashisth_CV.pdf">Download industry CV <span aria-hidden="true">↓</span></a>
