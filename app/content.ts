@@ -3,6 +3,7 @@ export type Project = {
   introduction?: string;
   contributionSummary?: string;
   assessment?: string;
+  modelEvidence?: { summary: string; items: { title: string; text: string; doi: string; sourceLabel: string }[] };
   breakupAnimations?: { featured: {title:string;src:string;poster:string;caption:string}[]; supporting: {title:string;src:string;poster:string;caption:string}[] };
   preliminary?: { rows: string[][]; note: string; figures: {title: string; src: string; alt: string; caption: string}[] };
   portfolioStudy?: {
@@ -90,7 +91,7 @@ export const projects: Project[] = [
     summary: "High-resolution LES-VOF simulations and matched experiments reveal how turbulent vortices, fluid-property ratios and internal flow govern bubble and droplet deformation and fragmentation.",
     question: "How do turbulent vortices, viscosity ratio and density ratio change breakup time, internal flow and daughter-fragment formation?",
     approach: ["Large-eddy simulation coupled with volume-of-fluid interface tracking", "Dynamic Smagorinsky-Lilly subgrid model and adaptive mesh refinement", "Matched high-speed experiments under identical hydrodynamic conditions", "Property-ratio comparison across air-water, dodecane-water and octanol-water systems", "Analysis of interfacial energy, internal velocity, pressure, stress and daughter sizes", "Large-scale parallel simulation using national HPC resources"],
-    evidence: [{ value: "94%", label: "turbulent kinetic energy resolved" }, { value: "d₀/100", label: "local interface resolution" }, { value: "30×", label: "neck velocity vs mean bubble velocity" }, { value: "HPC", label: "large-scale numerical execution" }],
+    evidence: [{ value: "94%", label: "resolved TKE · published air-water LES" }, { value: "d₀/100", label: "local interface resolution" }, { value: "30×", label: "neck velocity vs mean bubble velocity" }, { value: "HPC", label: "large-scale numerical execution" }],
     outcomes: ["Compared observable deformation and breakup behaviour with high-speed experiments; simulations resolved smaller interface features beyond experimental imaging limits.", "Resolved the accelerating internal redistribution flow that precedes bubble-neck collapse.", "Explained why liquid droplets and air bubbles deform and fragment over different timescales.", "Connected viscosity and inertia to thread formation, satellite fragments and daughter-size outcomes.", "Produced mechanistic evidence for improving population-balance breakup kernels used in reactor-scale CFD."],
     contribution: "Developed and executed the interface-resolving CFD methodology, designed the numerical-resolution strategy, planned and executed the HPC simulations, compared multiple fluid systems, validated predictions against high-speed experiments and led the mechanistic interpretation, conference presentation and journal publication.",
     heroImage: { src: "/research/bubble/hero.webp", alt: "Graphical summary of internal stress and velocity during turbulent bubble breakup", caption: "Interface-resolving LES-VOF exposes the internal velocity and stress fields that precede neck collapse." },
@@ -386,7 +387,7 @@ if (!eduProject) {
 }
 
 const eduPortfolioStudy: NonNullable<Project["portfolioStudy"]> = {
-  status: "Completed independent engineering study",
+  status: "Electric-drive thermal management · Completed independent engineering study",
   objective:
     "A helical cooling jacket must remove stator heat without imposing excessive pressure loss. Compared with the six-turn reference, seven turns reduced peak equivalent-stator temperature by 1.4 K while increasing pressure loss by 16.2%. Design selection depends on the available thermal margin and pressure budget.",
   contribution:
@@ -504,6 +505,7 @@ const eduPortfolioStudy: NonNullable<Project["portfolioStudy"]> = {
     "Across the low, reference and high flow cases, energy imbalance was 0.0154%, 0.00181% and 0.0111%, respectively.",
   ],
   limitations: [
+    "The seven-turn channel favours cooling, reducing peak equivalent-stator temperature by 1.4 K while increasing total pressure loss by 16.2% relative to the six-turn reference. The five-turn channel favours lower hydraulic demand, reducing pressure loss by 16.4% while raising peak temperature by 1.9 K.",
     "No approved maximum stator temperature or hydraulic/pumping budget is established; design selection remains conditional on those requirements.",
   ],
   figures: [
@@ -589,7 +591,7 @@ const eduPortfolioStudy: NonNullable<Project["portfolioStudy"]> = {
 Object.assign(eduProject, {
   title: "EDU Cooling Jacket - Thermal-Hydraulic Design Study",
   shortTitle: "EDU Cooling Jacket Design Study",
-  discipline: "STAR-CCM+ · ANSYS Fluent · Conjugate heat transfer",
+  discipline: "Thermal management · Conjugate heat transfer",
   summary:
     "I developed a conjugate-heat-transfer model of an electric-drive cooling jacket to quantify the trade-off between stator cooling and coolant pressure loss.",
   introduction: eduPortfolioStudy.objective,
@@ -627,6 +629,90 @@ bubble.breakupAnimations = {
   {title:"Octanol: extended close view",src:"/research/bubble/animations/fragment-closeup.mp4",poster:"/research/bubble/animations/fragment-closeup.webp",caption:"The longer source sequence shows fragment shapes and thin threads; its opening frames are blank before the rendered view appears."}
  ]
 };
+const modelEvidenceBySlug: Record<string, NonNullable<Project["modelEvidence"]>> = {
+  "microwave-plasma-quenching": {
+    "summary": "Published mesh- and time-step studies support the reactor predictions; experimental temperature and species comparisons assess separate aspects of model accuracy.",
+    "items": [
+      {
+        "title": "2024 reactor model: mesh independence",
+        "text": "The 6,245,968- and 7,450,557-cell meshes both report a maximum temperature of 5,972 K and an outlet NO mole fraction of 0.743% at the precision reported in Table 3.",
+        "doi": "10.1016/j.cej.2024.154756",
+        "sourceLabel": "2024 study, Section 3.6 and Table 3"
+      },
+      {
+        "title": "2026 jet-quenching LES: mesh and turbulence resolution",
+        "text": "The 8.4- and 10.8-million-cell meshes both report a volume-integrated net NO formation rate of 1.25 × 10⁻⁷ kmol/s. Reported resolved turbulent kinetic energy increases from 94% to 96%.",
+        "doi": "10.1016/j.cej.2026.178575",
+        "sourceLabel": "2026 study, Section 3.5 and Table 2"
+      },
+      {
+        "title": "2026 jet-quenching LES: time-step independence",
+        "text": "At time steps of 10⁻⁵ and 10⁻⁶ s, both first- and second-order implicit schemes report the same volume-integrated net NO formation rate, 1.25 × 10⁻⁷ kmol/s, at the published precision.",
+        "doi": "10.1016/j.cej.2026.178575",
+        "sourceLabel": "2026 study, Table 3"
+      }
+    ]
+  },
+  "bubble-breakup-les-vof": {
+    "summary": "The published air-water study combines mesh-independent interface resolution with experimental comparisons of bubble deformation, breakup time and daughter-size distributions.",
+    "items": [
+      {
+        "title": "Interface and time resolution",
+        "text": "Multiple adaptive-refinement levels were evaluated; the fourth level was selected as the mesh-independent configuration. Local interface resolution reached d₀/100, with a simulation time step of 2.5 µs.",
+        "doi": "10.1016/j.cej.2025.162019",
+        "sourceLabel": "2025 study, Sections 3.1-3.2"
+      },
+      {
+        "title": "Reported LES turbulence resolution",
+        "text": "The 2025 air-water LES reports 94% of turbulent kinetic energy resolved. This describes turbulence resolution, separately from the experimental comparison of breakup behaviour.",
+        "doi": "10.1016/j.cej.2025.162019",
+        "sourceLabel": "2025 study, Section 3.1"
+      },
+      {
+        "title": "Experimental breakup-time comparison",
+        "text": "At Weber number 0.3, mean breakup time is 3.8 ms experimentally and 3.6 ms in simulation. At Weber number 0.5, both report 3.4 ms. Breakup time runs from predominantly spherical shape to fragmentation.",
+        "doi": "10.1016/j.cej.2025.162019",
+        "sourceLabel": "2025 study, Section 4.1 and Table 3"
+      }
+    ]
+  },
+  "shear-thinning-rivulet": {
+    "summary": "The model uses measured fluid properties and compares spreading with experiments at 25°, 45° and 75° inclination.",
+    "items": [
+      {
+        "title": "Measured-property model basis",
+        "text": "Fluid properties were measured and used in the three-dimensional transient free-surface model. Experimental images were analysed for wetted area and propagation length.",
+        "doi": "10.1007/978-981-97-6776-2_35",
+        "sourceLabel": "Published study, Sections 2-4"
+      },
+      {
+        "title": "Experimental comparison conditions",
+        "text": "Table 2 reports formulation-specific observation times at 25°, 45° and 75°. These comparisons do not all represent one common elapsed time; the wetted-area and propagation-length results should be interpreted for their individual cases.",
+        "doi": "10.1007/978-981-97-6776-2_35",
+        "sourceLabel": "Published study, Table 2"
+      }
+    ]
+  },
+  "rotor-stator-mixer": {
+    "summary": "Published rotor-stator studies document transient sampling and compare predicted power consumption with experimental benchmarks.",
+    "items": [
+      {
+        "title": "2019 LES: time resolution and sampling",
+        "text": "The sliding-mesh LES used a time step of 1/120 of a rotor revolution. Flow developed over 100 rotor rotations before statistics were sampled over a further 20 rotations.",
+        "doi": "10.1016/j.cherd.2019.05.045",
+        "sourceLabel": "2019 study, modelling approach"
+      },
+      {
+        "title": "2019 square-head power benchmark",
+        "text": "For the square-head mixer at 4,000 rpm, LES predicts a power number of 2.2 versus the published experimental value of 2.3, approximately 4.3% lower. The numerical reference value of 2.05 is a separate simulation comparison.",
+        "doi": "10.1016/j.cherd.2019.05.045",
+        "sourceLabel": "2019 study, Table 1"
+      }
+    ]
+  }
+};
+projects.forEach(project => { project.modelEvidence = modelEvidenceBySlug[project.slug]; });
+
 const presentationOrder = ["microwave-plasma-quenching","edu-cooling-jacket","bubble-breakup-les-vof","shear-thinning-rivulet","rotor-stator-mixer"];
 projects.sort((a,b)=>presentationOrder.indexOf(a.slug)-presentationOrder.indexOf(b.slug));
 projects.forEach((project,index)=>{project.index=String(index+1).padStart(2,"0");});

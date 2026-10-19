@@ -3,8 +3,8 @@ import { featuredPublications, projects } from "./content";
 const capabilities = [
   ["Multiphase Flow", "VOF · Turbulence-Interface Interactions · Bubble & Droplet Dynamics · Non-Newtonian Free-Surface Flows"],
   ["Reacting Flow & Plasma", "Multi-Species Transport · Finite-Rate Chemistry · Coupled Flow, Thermal & Chemical Analysis · Plasma Reactor · Electromagnetic-CFD Coupling"],
-  ["Turbulence & Rotating Flows", "LES · RANS · Turbulent Flow Structures · Energy Dissipation · Rotor-Stator Interactions"],
-  ["Heat & Mass Transfer", "Convective Heat Transfer · Thermal Radiation · Thermal Quenching · Mixing · Residence-Time Analysis"],
+  ["Turbulence & Rotating Flows", "LES · RANS · Turbulent Flow Structures · Energy Dissipation · Rotor-Stator Interactions · Mixing & Residence-Time Analysis"],
+  ["Heat Transfer & Thermal Management", "Conjugate Heat Transfer (CHT) · Liquid Cooling · Convective Heat Transfer · Thermal Radiation · Thermal Quenching"],
   ["Flow Solvers & Numerical Methods", "Compressible & Incompressible Flows · Pressure-Based & Density-Based Solvers · Transient Simulation · Adaptive Mesh Refinement"],
   ["Verification & Validation", "Mesh-Independence Studies · Convergence Assessment · Experimental Validation"],
 ];
@@ -12,7 +12,7 @@ const capabilities = [
 const engineeringTools = [
   ["Simulation & Multiphysics", "ANSYS Fluent · STAR-CCM+ · ANSYS HFSS · ANSYS Workbench"],
   ["CAD & Geometry", "Siemens NX · Ansys DesignModeler"],
-  ["Programming, Automation & Analysis", "UDF/C · Python · PyFluent · MATLAB · Jupyter Notebook"],
+  ["Programming, Automation & Analysis", "UDF/C · Python · PyFluent · PyAEDT · MATLAB · Jupyter Notebook"],
   ["Computing & Post-Processing", "HPC · Linux · Tecplot"],
 ];
 
@@ -114,6 +114,7 @@ export default function Home() {
             <p>At Chalmers University of Technology, I lead CFD simulations and technical interpretation in collaborative reactor-development work. My experience spans plasma and reacting flows, interface-resolving multiphase simulations, rotor-stator mixers, non-Newtonian free surfaces and heat transfer.</p>
             <p>Collaborations with NitroCapt, Reckitt Benckiser, Maastricht University and Loughborough University have connected my modelling work with experiments and equipment performance. This includes presenting results, examining model assumptions and developing recommendations with experimental and engineering colleagues.</p>
             <p>I am pursuing industry roles in CFD and simulation engineering, applying this experience to design development, performance evaluation and challenging flow problems.</p>
+            <p className="work-authorisation"><strong>Work authorisation:</strong> Authorised to work in Sweden. No employer sponsorship required to start employment.</p>
             <div className="profile-links"><a href="https://www.linkedin.com/in/vikash-vashisth-phd-b8576838" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://scholar.google.co.in/citations?user=JfO8GY8AAAAJ&hl=en" target="_blank" rel="noreferrer">Google Scholar ↗</a><a href="https://orcid.org/0000-0003-4644-2624" target="_blank" rel="noreferrer">ORCID ↗</a><a href="mailto:vikasche.engg@gmail.com">Email ↗</a></div>
           </div>
         </div>
