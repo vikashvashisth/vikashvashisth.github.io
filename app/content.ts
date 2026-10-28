@@ -391,7 +391,7 @@ const eduPortfolioStudy: NonNullable<Project["portfolioStudy"]> = {
   objective:
     "A helical cooling jacket must remove stator heat without imposing excessive pressure loss. Compared with the six-turn reference, seven turns reduced peak equivalent-stator temperature by 1.4 K while increasing pressure loss by 16.2%. Design selection depends on the available thermal margin and pressure budget.",
   contribution:
-    "I built the parameterized three-body CAD in Siemens Designcenter/NX, prepared the conjugate-heat-transfer models, established mesh-independent CFD predictions and evaluated coolant-flow and cooling-channel geometry variations. I also developed assisted STAR-CCM+ extraction and PyFluent CAD-to-results workflows for setup checks, checkpoint recovery, conservation reports and standardized exports. The results presented here compare flow rate and channel-turn count.",
+    "I built the parameterized three-body CAD in Siemens Designcenter/NX, prepared the conjugate-heat-transfer models, assessed mesh sensitivity and conservation and evaluated coolant-flow and cooling-channel geometry variations. I also developed assisted STAR-CCM+ extraction and PyFluent CAD-to-results workflows for setup checks, checkpoint recovery, conservation reports and standardized exports. The results presented here compare flow rate and channel-turn count.",
   scope: [
     "Compared the six-turn reference geometry with five- and seven-turn channels at 0.110 kg/s, and evaluated flow rates from 0.088 to 0.132 kg/s.",
     "Compared the STAR-CCM+ reference with a separately configured ANSYS Fluent baseline.",
@@ -500,7 +500,7 @@ const eduPortfolioStudy: NonNullable<Project["portfolioStudy"]> = {
   },
   checks: [
     "The Medium mesh is used as the intermediate comparison baseline. Production-to-Medium changes were 0.226 K in peak temperature and 0.426% in total pressure drop; Medium-to-Fine changes were 0.148 K and 1.003%, respectively.",
-    "Peak-temperature changes between successive meshes were below 0.23 K. Pressure-drop changes were approximately 1% or less, with the Medium-to-Fine change of 1.003% slightly above the provisional 1% check. The non-monotonic results provide an engineering mesh-independence assessment, rather than a formal discretization-uncertainty estimate.",
+    "Peak-temperature changes between successive meshes were below 0.23 K. Pressure-drop changes were approximately 1% or less, with the Medium-to-Fine change of 1.003% slightly above the provisional 1% check. The non-monotonic results support a qualified mesh-sensitivity assessment; they do not establish formal mesh independence or a discretization-uncertainty estimate.",
     "For the Medium mesh, energy imbalance is 0.00181% and signed mass imbalance is −6.18 × 10⁻⁸ kg/s.",
     "Across the low, reference and high flow cases, energy imbalance was 0.0154%, 0.00181% and 0.0111%, respectively.",
   ],
@@ -514,21 +514,21 @@ const eduPortfolioStudy: NonNullable<Project["portfolioStudy"]> = {
       src: "/research/edu/geometry.png",
       alt: "Electric-drive housing, homogenized stator and six-turn helical coolant channel",
       caption:
-        "Parameterized housing, homogenized stator and six-turn coolant channel at 30 mm pitch. This reference geometry is distinct from the Medium computational mesh.",
+        "Six-turn reference at 30 mm pitch. The helical coolant passage connects the two end ports; heat passes from the homogenized stator through the aluminium housing to the coolant. Labels identify the three model bodies; the heat route is schematic.",
     },
     {
       title: "Flow-rate thermal–hydraulic comparison",
       src: "/research/edu/flow-rate-comparison.png",
       alt: "Aligned panels show maximum stator temperature and total pressure drop versus coolant mass flow, highlighting the 0.110 kilograms per second Medium baseline",
       caption:
-        "Peak stator temperature and total pressure drop across three flow rates on the Medium mesh; the six-turn reference is 0.110 kg/s.",
+        "Does extra flow justify its hydraulic cost? Three six-turn, 14 mm-channel cases on the Medium mesh show lower peak stator temperature with higher total pressure drop. The open marker is the 0.110 kg/s reference; focused vertical scales show differences.",
     },
     {
       title: "Channel-turn thermal–hydraulic comparison",
       src: "/research/edu/helix-pitch-comparison.png",
       alt: "Aligned panels compare maximum stator temperature and total pressure drop for six-turn, five-turn and seven-turn cooling channels",
       caption:
-        "Peak stator temperature and total pressure drop for the six-turn reference and five- and seven-turn channels at 0.110 kg/s.",
+        "What changes with turn count at fixed flow? Five, six and seven turns at 0.110 kg/s trade lower peak stator temperature for higher total pressure drop. The open marker identifies six turns. Case-specific meshes, 14 mm channel and 180 mm axial span; focused vertical scales show differences.",
     },
     {
       title: "Reference-design solid-surface temperature",
@@ -569,14 +569,14 @@ const eduPortfolioStudy: NonNullable<Project["portfolioStudy"]> = {
       src: "/research/edu/Medium_Pressure_Drop_Convergence.png",
       alt: "STAR-CCM+ Medium total pressure-drop monitor from iteration 2000 to 3000",
       caption:
-        "The total pressure-drop monitor settles near 3.21 kPa over the final 1,000 iterations.",
+        "Following the restart transient at iteration 2000, reported total pressure drop settles near 3.21 kPa by the end of the retained history.",
     },
     {
       title: "Six-turn reference · maximum stator-temperature monitor",
       src: "/research/edu/Medium_Stator_Temperature_Convergence.png",
       alt: "STAR-CCM+ Medium maximum stator-temperature monitor from iteration 2000 to 3000",
       caption:
-        "The maximum stator-temperature monitor is nearly steady around 466.2 K over the final 1,000 iterations.",
+        "Maximum homogenized-stator temperature approaches 466.2 K following the restart at iteration 2000. The narrow vertical scale reveals the remaining small drift.",
     },
     {
       title: "Six-turn reference · residual history",
@@ -593,7 +593,7 @@ Object.assign(eduProject, {
   shortTitle: "EDU Cooling Jacket Design Study",
   discipline: "Thermal management · Conjugate heat transfer",
   summary:
-    "I developed a conjugate-heat-transfer model of an electric-drive cooling jacket to quantify the trade-off between stator cooling and coolant pressure loss.",
+    "My CFD study quantified the cost of extra cooling: 2.76 K from increased flow required 61.3% more hydraulic power. Changing channel turns offered another thermal-hydraulic trade-off; final selection remained conditional on temperature and pump-head limits.",
   introduction: eduPortfolioStudy.objective,
   contribution: eduPortfolioStudy.contribution,
   portfolioStudy: eduPortfolioStudy,

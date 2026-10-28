@@ -430,3 +430,11 @@ a:focus-visible,summary:focus-visible,video:focus-visible,[tabindex]:focus-visib
 
 .case-model-evidence>h2 {font-size:clamp(25px,3vw,34px);line-height:1.25;letter-spacing:-.025em;margin:12px 0 18px}
 .case-model-evidence>p:not(.eyebrow) {font-size:16px;line-height:1.8;color:var(--muted)}
+
+/* EDU shares the standard case-page structure; only technical media needs sizing. */
+.edu-integrated .annotated-media {display:block;width:100%;height:auto;background:white}
+.edu-integrated .case-body p:not(.eyebrow),.edu-integrated .edu-archive p,.edu-integrated .edu-archive li {color:var(--muted);font-size:16px;line-height:1.8}
+.edu-integrated .edu-archive h3 {font-size:19px;line-height:1.45;margin:28px 0 12px}
+.edu-integrated .edu-model-grid h3 {margin-top:0}
+.edu-integrated .hero-research-figure figcaption {display:flex;flex-direction:column;gap:10px}
+.edu-integrated .figure-grid .figure-wide img {height:auto;max-height:none}

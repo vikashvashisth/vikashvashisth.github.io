@@ -9,13 +9,30 @@ function ScientificImage({src,alt}:{src:string;alt:string}) {
  const size=(figureDimensions as Record<string,number[]>)[src];
  return <img src={src} alt={alt} width={size?.[0]} height={size?.[1]} loading="lazy"/>;
 }
-function FigureCard({item}:{item:Figure}) {
+function FigureCard({item,hero=false}:{item:Figure;hero?:boolean}) {
  const full=item.src;
  const quantitative=full?.endsWith("/quantitative-validation.webp");
  const thermal=full?.endsWith("/Medium_Solid_Temperature.png");
- return <figure className={quantitative ? "scientific-figure figure-wide" : "scientific-figure"}>
+ const geometry=full?.endsWith("/edu/geometry.png");
+ const chart=full?.endsWith("/flow-rate-comparison.png") || full?.endsWith("/helix-pitch-comparison.png");
+ return <figure className={hero ? "hero-research-figure scientific-figure" : quantitative || chart ? "scientific-figure figure-wide" : "scientific-figure"}>
   {full && <a className="research-figure-link" href={full} target="_blank" rel="noreferrer" aria-label={`Open full-size figure: ${item.title} (new tab)`}>
-   {thermal ? <svg className="annotated-media" viewBox="0 0 1920 1080" role="img" aria-label="Temperature on housing and homogenized-stator surfaces, with component labels and original temperature scale in kelvin">
+   {geometry ? <svg className="annotated-media" viewBox="0 0 1938 1320" role="img" aria-label="Six-turn reference: homogenized stator, aluminium housing and helical coolant passage; schematic heat route from stator through housing to coolant">
+    <image href={full} width="1938" height="1166"/>
+    <g fill="white" stroke="#142b3a" strokeWidth="3">
+      <path d="M 470 220 L 790 300 M 1450 180 L 1190 145 M 1460 750 L 1265 695" fill="none"/>
+      <rect x="50" y="155" width="450" height="80" rx="8"/>
+      <rect x="1410" y="115" width="480" height="80" rx="8"/>
+      <rect x="1410" y="725" width="480" height="80" rx="8"/>
+    </g>
+    <g fill="#142b3a" fontSize="38" fontFamily="sans-serif">
+      <text x="80" y="208">Homogenized stator</text>
+      <text x="1440" y="168">Aluminium housing</text>
+      <text x="1440" y="778">Helical coolant path</text>
+      <text x="160" y="1220">Heat route (schematic): stator → housing → coolant</text>
+      <text x="160" y="1280" fontSize="32">Six turns · 30 mm pitch · two connected end ports</text>
+    </g>
+   </svg> : thermal ? <svg className="annotated-media" viewBox="0 0 1920 1080" role="img" aria-label="Temperature on housing and homogenized-stator surfaces, with component labels and original temperature scale in kelvin">
     <image href={full} width="1920" height="1080"/>
     <rect x="500" y="28" width="980" height="90" fill="white"/>
     <text x="960" y="82" textAnchor="middle" fontSize="38" fill="#142b3a">Reference-design solid-surface temperature</text>
@@ -53,69 +70,58 @@ function ResultsTable({headers,rows,label}:{headers:string[];rows:string[][];lab
 }
 
 function PortfolioStudy({study}:{study:NonNullable<Project["portfolioStudy"]>}){
-  const [geometryFigure, ...designFigures] = study.figures;
-  return <div className="edu-study">
-    <section className="edu-study-section section-shell" aria-labelledby="edu-objective">
-      <p className="eyebrow">{study.status}</p><h2 id="edu-objective">1. Engineering objective and contribution</h2>
-      <p className="edu-study-lead">{study.objective}</p>
-      <h3>My contribution</h3><p>{study.contribution}</p>
-      {geometryFigure && <div className="figure-grid edu-figure-grid"><FigureCard item={geometryFigure}/></div>}
+  const [geometry, flow, turns, thermal] = study.figures;
+  const metrics = [
+    {value:"2.76 K",label:"lower peak stator temperature · flow 0.110 to 0.132 kg/s"},
+    {value:"+61.3%",label:"hydraulic power · same flow increase, excluding pump efficiency"},
+    {value:"1.44 K",label:"lower peak stator temperature · seven vs six turns at 0.110 kg/s"},
+    {value:"+16.2%",label:"total pressure drop · same seven- vs six-turn comparison"},
+  ];
+  return <div className="edu-study edu-integrated">
+    <nav className="case-section-nav section-shell" aria-label="Case study sections"><a href="#case-outcomes">Engineering outcomes</a><a href="#case-evidence">Figures and evidence</a><a href="#case-model">Model credibility</a><a href="#edu-next">Design implications</a></nav>
+    <section className="case-visual section-shell"><FigureCard item={geometry} hero/></section>
+    <section className="case-body section-shell">
+      <aside><p className="eyebrow">Engineering question</p><h2>How much additional cooling do changes in flow and channel geometry buy, and at what pressure loss?</h2><p className="edu-story-copy">I investigated how coolant flow and helical-channel geometry change heat removal from an electric-drive housing. The engineering question was how much additional cooling each change buys, and what pressure loss accompanies it. Without a manufacturer temperature limit or pump-head budget, my result is a set of conditional design choices.</p></aside>
+      <div><p className="eyebrow">Modelling approach</p><ol>
+        {["Parameterized three-body CAD: coolant, aluminium housing and homogenized stator","STAR-CCM+ conjugate heat transfer with mesh-sensitivity and conservation checks","Flow-rate and channel-turn comparisons, plus a separate Fluent baseline benchmark"].map((item,i)=><li key={item}><span>0{i+1}</span>{item}</li>)}
+      </ol><p className="edu-story-copy">I used approximately 5 kW of uniform stator heat generation, 65 °C inlet coolant and 50 wt% ethylene-glycol/water. Steady flow, constant properties, zero added interface resistance and adiabatic exterior surfaces define the comparison. They exclude alternative heat-rejection paths and contact penalties. The homogenized stator maximum is not a resolved winding hotspot.</p></div>
     </section>
-    <section className="edu-study-section edu-study-muted" aria-labelledby="edu-scope">
-      <div className="section-shell"><h2 id="edu-scope">2. Model and assumptions</h2>
-        <ul>{study.scope.map((item)=><li key={item}>{item}</li>)}</ul>
-        <p>{study.assumptions.join(" ")}</p>
-        <details className="edu-archive edu-model-definition"><summary>Detailed model definition and solver settings</summary>
-          <div className="edu-model-grid">{study.solverModels.map(({solver,details})=><article key={solver}><h3>{solver}</h3><p>{details}</p></article>)}</div>
-          <div className="edu-model-grid">{study.modelDefinition.map(({heading,items})=><article key={heading}><h3>{heading}</h3><ul>{items.map((item)=><li key={item}>{item}</li>)}</ul></article>)}</div>
-        </details>
-      </div>
+    <section className="evidence-band" aria-label="Predicted thermal-hydraulic results"><div className="section-shell evidence-grid">{metrics.map(({value,label})=><div key={label}><strong>{value}</strong><span>{label}</span></div>)}</div></section>
+    <section id="case-outcomes" className="case-results section-shell">
+      <div><p className="eyebrow">Engineering outcomes</p><h2>What the Model Revealed</h2></div>
+      <div className="outcome-list"><article id="edu-flow"><span>01</span><p className="edu-story-copy">Increasing flow from 0.110 to 0.132 kg/s reduced peak stator temperature by 2.76 K while total pressure drop rose 34.4%. Hydraulic power rose 61.3%; this is fluid-side pressure-flow power, excluding pump efficiency and electrical consumption. I would consider this change when a few kelvin matter and the cooling circuit can supply the additional flow and head.</p></article><article id="edu-turns"><span>02</span><p className="edu-story-copy">At 0.110 kg/s, seven turns at 25.7 mm pitch were 1.44 K cooler than the six-turn, 30 mm reference, with 16.2% higher total pressure drop. Five turns at 36 mm pitch were 1.91 K warmer, with 16.4% lower pressure drop. More turns change channel length and cooling coverage together; these results do not isolate either contribution or prove a particular loss mechanism.</p></article></div>
     </section>
-    <section className="edu-study-section section-shell" aria-labelledby="edu-baseline">
-      <h2 id="edu-baseline">3. Six-turn reference performance</h2>
-      <p>The six-turn cooling channel at 30 mm pitch is the reference design. Its modeled peak temperature is 466.2 K (193.1 °C), the maximum in the homogenized stator rather than a winding temperature. Production, Medium and Fine are mesh resolutions of this same geometry, not separate designs.</p>
-      <ResultsTable headers={study.baseline.headers} rows={study.baseline.rows} label="Six-turn reference design performance"/>
-    </section>
-    <section className="edu-study-section edu-study-muted" aria-labelledby="edu-tradeoffs">
-      <div className="section-shell"><h2 id="edu-tradeoffs">4. Flow-rate and helix-pitch trade-offs</h2>
-        <h3>Flow rate · fixed Medium mesh</h3>
-        <p>Increasing flow from 0.110 to 0.132 kg/s lowers peak stator temperature by about 2.8 K, while total pressure drop rises by 34%. Hydraulic power increases from 0.341 to 0.549 W; this is fluid-side power, not pump electrical consumption.</p>
-        <ResultsTable headers={study.flow.headers} rows={study.flow.rows} label="STAR-CCM+ flow-rate study"/>
-        <h3>Cooling-channel turns · 0.110 kg/s</h3>
-        <p>The five-turn channel has a warmer stator and lower pressure loss; the seven-turn channel has a cooler stator and greater pressure loss.</p>
-        <ResultsTable headers={study.pitch.headers} rows={study.pitch.rows} label="Cooling-channel turn comparison"/>
-        <h3>Design and flow fields</h3>
-        <p>The aligned plots compare peak stator temperature and total pressure drop. The solid-surface temperature view shows the reference design's thermal response. Supporting coolant fields are available below; total pressure drop is quantified separately in the table.</p>
-        <div className="figure-grid edu-figure-grid">{designFigures.map(item=><FigureCard key={item.src} item={item}/>)}</div>
-        <details className="edu-archive"><summary>Supporting coolant fields: static pressure and boundary temperature</summary>
-          <div className="figure-grid">{study.supportingContours.map(item=><FigureCard key={item.src} item={item}/>)}</div>
-        </details>
-      </div>
-    </section>
-    <section className="edu-study-section section-shell" aria-labelledby="edu-numerics">
-      <h2 id="edu-numerics">5. Model checks and solver comparison</h2>
-      <p>Numerical checks and the solver comparison qualify the reference prediction.</p>
-      <details className="edu-archive"><summary>Mesh-independence assessment, conservation and solver comparison</summary>
-      <h3>Mesh-independence assessment and conservation</h3><ResultsTable headers={study.meshComparison.headers} rows={study.meshComparison.rows} label="Mesh-independence assessment results"/>
-        <ul>{study.checks.map((item)=><li key={item}>{item}</li>)}</ul>
-      <h3>Baseline solver comparison</h3><p>Fluent is 1.71 K cooler and has 9.77% higher total pressure drop than STAR-CCM+ Medium; this cross-solver difference is not validation.</p><ResultsTable headers={study.solverComparison.headers} rows={study.solverComparison.rows} label="STAR-CCM+ and ANSYS Fluent baseline comparison"/>
-      </details>
-      <details className="edu-archive"><summary>Reference-design monitors and residuals · iterations 2000–3000</summary>
-        <p>Convergence assessment combined temperature and pressure-drop monitor stability with mass and energy conservation checks.</p>
-        <div className="figure-grid">{study.convergenceFigures.map(item=><FigureCard key={item.src} item={item}/>)}</div>
-      </details>
-      <details className="edu-archive"><summary>Wall-resolution evidence · STAR-CCM+</summary>
-        <div className="figure-grid">{study.verificationFigures.map(item=><FigureCard key={item.src} item={item}/>)}</div>
+    <section id="case-model" className="case-model-evidence section-shell">
+      <p className="eyebrow">Model credibility</p><h2>Numerical basis and comparison limits</h2><p className="edu-story-copy">I used the intermediate mesh as the comparison reference after checking three resolutions, monitor histories and conservation. Successive peak-temperature changes were below 0.23 K; total-pressure-drop changes were about 1% or less. The response was non-monotonic, and the 1.003% Medium-to-Fine pressure change narrowly exceeded the provisional 1% target. This supports comparative use with qualifications, rather than formal mesh independence.</p>
+      <details className="edu-archive"><summary>Model assumptions, material qualifications and solver settings</summary>
+        <div className="edu-model-grid">{study.solverModels.map(({solver,details})=><article key={solver}><h3>{solver}</h3><p>{details}</p></article>)}</div>
+        <div className="edu-model-grid">{study.modelDefinition.map(({heading,items})=><article key={heading}><h3>{heading}</h3><ul>{items.map(item=><li key={item}>{item}</li>)}</ul></article>)}</div>
+      </details> <details className="edu-archive"><summary>Numerical evidence and cross-solver differences</summary>
+        <h3>Three meshes of the same reference geometry</h3><ResultsTable {...study.meshComparison} label="Mesh sensitivity and conservation"/>
+        <ul>{study.checks.map(item=><li key={item}>{item}</li>)}</ul>
+        <h3>Separate Fluent baseline</h3><ResultsTable {...study.solverComparison} label="Cross-solver baseline benchmark"/>
+        <p>Fluent predicted a 1.71 K lower maximum and 9.77% higher total pressure drop. The temperature difference is comparable to the turn-count gains, so I would assess setup, mesh, property and reporting differences before relying on a small absolute margin. This benchmark is not experimental validation or proof that either solver is more accurate.</p>
+      </details> <details className="edu-archive"><summary>Restarted monitor histories, residuals and wall y+</summary>
+        <p>The retained histories cover iterations 2000 to 3000 following a restart. Pressure has a restart transient; temperature changes on a narrow vertical scale. Residuals decrease, but this record does not establish that every convergence criterion passed. The y+ map is wall-resolution evidence, not a mesh image.</p>
+        <div className="figure-grid">{[...study.convergenceFigures,...study.verificationFigures].map(item=><FigureCard key={item.src} item={item}/>)}</div>
       </details>
     </section>
-    <section className="edu-study-section edu-study-muted" aria-labelledby="edu-limitations">
-    <div className="section-shell"><h2 id="edu-limitations">6. Limitations and design-selection implications</h2>
-      <ul>{study.limitations.map((item)=><li key={item}>{item}</li>)}</ul>
-    </div>
+    <section id="case-evidence" className="case-figures section-shell">
+      <div className="section-heading"><div><p className="eyebrow">Engineering evidence</p><h2>Figures That Support the Engineering Story</h2></div><p className="edu-story-copy">The six-turn reference at 0.110 kg/s predicts a 466.2 K stator maximum. Its displayed stator surface is hotter than the outer housing. I use this field to show the spatial thermal response; it does not establish local heat-transfer coefficients or a dominant thermal resistance.</p></div>
+      <div className="figure-grid">{[thermal,flow,turns].map(item=><FigureCard key={item.src} item={item}/>)}</div>
+      <details className="edu-archive"><summary>Reference reports and supporting coolant fields</summary>
+        <ResultsTable {...study.baseline} label="Six-turn reference reports"/>
+        <p>Static-pressure colour extrema are distinct from reported inlet-to-outlet total pressure drop. Coolant boundary temperature is a surface field, not bulk coolant temperature.</p>
+        <div className="figure-grid">{study.supportingContours.map(item=><FigureCard key={item.src} item={item}/>)}</div>
+      </details> <details className="edu-archive"><summary>Inspect the three flow-rate cases</summary><ResultsTable {...study.flow} label="Flow-rate comparison"/><p>Displayed temperatures and powers are rounded. Headline changes use the supplied verified project deltas; they cannot be reconstructed exactly from rounded entries.</p></details> <details className="edu-archive"><summary>Inspect channel-turn results at fixed mass flow</summary><ResultsTable {...study.pitch} label="Channel-turn comparison"/><p>These geometries use case-specific meshes, a 14 mm channel and the same 180 mm axial cooling span. Changing pitch also changes turn count. The available evidence does not establish a combined high-flow, seven-turn result.</p></details>
     </section>
+    <section id="edu-next" className="case-results section-shell">
+      <div><p className="eyebrow">Engineering judgement</p><h2>My recommendation depends on the constraint</h2></div>
+      <div className="outcome-list"><article><span>01</span><p className="edu-story-copy">For a pressure-constrained circuit with sufficient thermal margin, I would carry the five-turn option forward. For a tighter thermal constraint with available head, I would assess seven turns or increased flow against the required margin. I would retain six turns as the comparison reference until those requirements are defined.</p></article><article><span>02</span><p className="edu-story-copy">Before a hardware decision, I would establish the allowable component temperatures and circuit pump curve, check sensitivity to contact resistance, material properties and heat distribution, and extend verification to candidate geometries. Winding-resolved temperatures, representative duty cycles, manufacturing and sealing review, and a measured thermal-hydraulic benchmark would be needed to judge hardware suitability.</p></article></div>
+    </section>
+    <section className="contribution section-shell"><p className="eyebrow">My contribution</p><p className="edu-story-copy">I built parameterized three-body CAD in Siemens Designcenter/NX, representing coolant, aluminium housing and a homogenized stator. I configured STAR-CCM+ conjugate-heat-transfer studies for mesh sensitivity, flow rate, channel diameter and helix pitch, plus a separate ANSYS Fluent baseline benchmark. I automated STAR-CCM+ extraction and a PyFluent CAD-to-results workflow with checks, restart recovery and exports. These workflows did not automate the entire multi-case design study; the comparisons here cover flow and turn count.</p></section>
   </div>;
 }
-
 export function generateStaticParams(){ return projects.map(({slug})=>({slug})); }
 
 export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{
