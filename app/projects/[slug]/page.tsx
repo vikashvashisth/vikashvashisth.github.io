@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { projects, type Project } from "../../content";
 import figureDimensions from "../../figure-dimensions.json";
+import { SteadyFieldAnimation } from "../../../components/steady-field-animation";
 
 
 type Figure = {title:string;src?:string;alt?:string;caption?:string};
@@ -91,6 +92,14 @@ function PortfolioStudy({study}:{study:NonNullable<Project["portfolioStudy"]>}){
       <div><p className="eyebrow">Engineering outcomes</p><h2>What the Model Revealed</h2></div>
       <div className="outcome-list"><article id="edu-flow"><span>01</span><p className="edu-story-copy">Increasing flow from 0.110 to 0.132 kg/s reduced peak stator temperature by 2.76 K while total pressure drop rose 34.4%. Hydraulic power rose 61.3%; this is fluid-side pressure-flow power, excluding pump efficiency and electrical consumption. I would consider this change when a few kelvin matter and the cooling circuit can supply the additional flow and head.</p></article><article id="edu-turns"><span>02</span><p className="edu-story-copy">At 0.110 kg/s, seven turns at 25.7 mm pitch were 1.44 K cooler than the six-turn, 30 mm reference, with 16.2% higher total pressure drop. Five turns at 36 mm pitch were 1.91 K warmer, with 16.4% lower pressure drop. More turns change channel length and cooling coverage together; these results do not isolate either contribution or prove a particular loss mechanism.</p></article></div>
     </section>
+    <section id="edu-field-animations" className="case-model-evidence section-shell">
+      <p className="eyebrow">Steady-field comparisons</p><h2>Look inside the flow-rate and diameter studies</h2>
+      <p className="edu-story-copy">The section moves through each saved steady temperature field. These are spatial comparisons, not transient heating simulations. Matching temperature scales support comparison; the labels report global peak stator temperatures.</p>
+      <div className="figure-grid edu-animation-grid">
+        <SteadyFieldAnimation title="More flow: cooling benefit and hydraulic cost" src="/research/edu/EDU_LinkedIn_Cooling_Tradeoff_720.gif" poster="/research/edu/EDU_LinkedIn_Cooling_Tradeoff_720_poster.webp" caption="The six-turn, 14 mm channel at 0.110 and 0.132 kg/s on the Medium mesh. Increasing flow by 20% lowers peak modelled stator temperature by 2.76 K and increases hydraulic power by 61.3%. Hydraulic power excludes pump efficiency and electrical consumption."/>
+        <SteadyFieldAnimation title="Larger channel: lower pressure loss, slightly warmer stator" src="/research/edu/EDU_LinkedIn_Channel_Diameter_720.gif" poster="/research/edu/EDU_LinkedIn_Channel_Diameter_720_poster.webp" caption="The 14 and 16 mm channels at 0.110 kg/s, six turns and 30 mm pitch. The larger channel reduces total pressure drop by 44.6% while peak modelled stator temperature rises by 0.97 K. Case-specific meshes apply; wall thickness and manufacturing feasibility were not assessed."/>
+      </div>
+    </section>
     <section id="case-model" className="case-model-evidence section-shell">
       <p className="eyebrow">Model credibility</p><h2>Numerical basis and comparison limits</h2><p className="edu-story-copy">I used the intermediate mesh as the comparison reference after checking three resolutions, monitor histories and conservation. Successive peak-temperature changes were below 0.23 K; total-pressure-drop changes were about 1% or less. The response was non-monotonic, and the 1.003% Medium-to-Fine pressure change narrowly exceeded the provisional 1% target. This supports comparative use with qualifications, rather than formal mesh independence.</p>
       <details className="edu-archive"><summary>Model assumptions, material qualifications and solver settings</summary>
@@ -106,6 +115,14 @@ function PortfolioStudy({study}:{study:NonNullable<Project["portfolioStudy"]>}){
         <div className="figure-grid">{[...study.convergenceFigures,...study.verificationFigures].map(item=><FigureCard key={item.src} item={item}/>)}</div>
       </details>
     </section>
+    <section id="edu-solver-benchmark" className="case-model-evidence section-shell">
+      <p className="eyebrow">Separate Fluent baseline</p><h2>Compare the fields, then the reported quantities</h2>
+      <p className="edu-story-copy">The STAR-CCM+ Medium baseline and retained engineering-converged Fluent benchmark represent the same intended six-turn, 14 mm-channel baseline at 0.110 kg/s. They use separate meshes. Geometry discretization and qualifications in boundary-condition and numerical equivalence prevent attribution of the differences to the solvers alone.</p>
+      <div className="edu-benchmark-figures">
+        <FigureCard item={{title:"Native static-pressure fields: STAR-CCM+ and Fluent",src:"/research/edu/EDU_Native_pressure_Comparison.png",alt:"Side-by-side native coolant-boundary static-pressure contours for STAR-CCM+ Medium and Fluent baseline, each using a display range from minus 500 to 4000 pascals",caption:"Static pressure on the coolant boundaries, shown with the same numerical display range of -500 to 4000 Pa. Each solver retains its own colour palette and lighting, so read the individual legends. These contours are distinct from the inlet-to-outlet total pressure drop reported below."}}/>
+        <FigureCard item={{title:"Baseline temperature and total-pressure-drop comparison",src:"/research/edu/EDU_STAR_Fluent_Baseline_Comparison.png",alt:"STAR-CCM+ and Fluent baseline comparison: peak homogenized-stator temperatures 193.05 and 191.34 degrees Celsius, and total pressure drops 3.208 and 3.522 kilopascals",caption:"Fluent predicts a 1.71 K lower global peak homogenized-stator temperature and 9.77% higher total pressure drop relative to STAR-CCM+. The temperature plot has a focused axis; the pressure plot starts at zero. Separate meshes contain 2.472 and 3.275 million cells. Cross-solver agreement adds evidence but does not replace experimental validation."}}/>
+      </div>
+    </section>
     <section id="case-evidence" className="case-figures section-shell">
       <div className="section-heading"><div><p className="eyebrow">Engineering evidence</p><h2>Figures That Support the Engineering Story</h2></div><p className="edu-story-copy">The six-turn reference at 0.110 kg/s predicts a 466.2 K stator maximum. Its displayed stator surface is hotter than the outer housing. I use this field to show the spatial thermal response; it does not establish local heat-transfer coefficients or a dominant thermal resistance.</p></div>
       <div className="figure-grid">{[thermal,flow,turns].map(item=><FigureCard key={item.src} item={item}/>)}</div>
@@ -119,7 +136,7 @@ function PortfolioStudy({study}:{study:NonNullable<Project["portfolioStudy"]>}){
       <div><p className="eyebrow">Engineering judgement</p><h2>My recommendation depends on the constraint</h2></div>
       <div className="outcome-list"><article><span>01</span><p className="edu-story-copy">For a pressure-constrained circuit with sufficient thermal margin, I would carry the five-turn option forward. For a tighter thermal constraint with available head, I would assess seven turns or increased flow against the required margin. I would retain six turns as the comparison reference until those requirements are defined.</p></article><article><span>02</span><p className="edu-story-copy">Before a hardware decision, I would establish the allowable component temperatures and circuit pump curve, check sensitivity to contact resistance, material properties and heat distribution, and extend verification to candidate geometries. Winding-resolved temperatures, representative duty cycles, manufacturing and sealing review, and a measured thermal-hydraulic benchmark would be needed to judge hardware suitability.</p></article></div>
     </section>
-    <section className="contribution section-shell"><p className="eyebrow">My contribution</p><p className="edu-story-copy">I built parameterized three-body CAD in Siemens Designcenter/NX, representing coolant, aluminium housing and a homogenized stator. I configured STAR-CCM+ conjugate-heat-transfer studies for mesh sensitivity, flow rate, channel diameter and helix pitch, plus a separate ANSYS Fluent baseline benchmark. I automated STAR-CCM+ extraction and a PyFluent CAD-to-results workflow with checks, restart recovery and exports. These workflows did not automate the entire multi-case design study; the comparisons here cover flow and turn count.</p></section>
+    <section className="contribution section-shell"><p className="eyebrow">My contribution</p><p className="edu-story-copy">I built parameterized three-body CAD in Siemens Designcenter/NX, representing coolant, aluminium housing and a homogenized stator. I configured STAR-CCM+ conjugate-heat-transfer studies for mesh sensitivity, flow rate, channel diameter and helix pitch, plus a separate ANSYS Fluent baseline benchmark. I automated STAR-CCM+ extraction and a PyFluent CAD-to-results workflow with checks, restart recovery and exports. These workflows did not automate the entire multi-case design study; the comparisons here cover flow, diameter and turn count.</p></section>
   </div>;
 }
 export function generateStaticParams(){ return projects.map(({slug})=>({slug})); }
