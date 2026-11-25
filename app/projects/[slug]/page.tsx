@@ -202,9 +202,9 @@ export default async function ProjectPage({params}:{params:Promise<{slug:string}
             <h3>Connecting the microwave field to the plasma state</h3>
             <p>The plasma changes the electrical response of the gas. That response influences the electromagnetic field and the distribution of absorbed power.</p>
             <ul>
-              <li>Microwave feed and applicator</li>
-              <li>Quartz reactor tube</li>
-              <li>Illustrative plasma region</li>
+              <li><span className="coupling-swatch coupling-swatch--metal" aria-hidden="true" />Microwave feed and applicator</li>
+              <li><span className="coupling-swatch coupling-swatch--quartz" aria-hidden="true" />Quartz reactor tube</li>
+              <li><span className="coupling-swatch coupling-swatch--plasma" aria-hidden="true" />Illustrative plasma region</li>
             </ul>
           </div>
           <figcaption>{project.coupling.illustration.caption}</figcaption>

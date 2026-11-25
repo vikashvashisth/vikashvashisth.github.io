@@ -237,7 +237,12 @@ footer>div:last-child { display: flex; flex-direction: column; gap: 8px; text-al
 .coupling-illustration img, .coupling-diagram img { display: block; width: 100%; height: auto; }
 .coupling-physical { padding: 22px; }
 .coupling-physical h3, .coupling-flow h3, .coupling-contributions h3, .coupling-purpose h3 { margin: 0 0 10px; }
-.coupling-physical ul { margin: 14px 0 0; padding-left: 1.2em; color: var(--muted); }
+.coupling-physical ul { display: grid; gap: 8px; margin: 16px 0 0; padding: 0; list-style: none; color: var(--muted); }
+.coupling-physical li { display: flex; align-items: center; gap: 10px; }
+.coupling-swatch { flex: 0 0 14px; height: 14px; border: 1px solid; border-radius: 3px; }
+.coupling-swatch--metal { background: #82949c; border-color: #536872; }
+.coupling-swatch--quartz { background: #a4d7db; border-color: #4c8b91; }
+.coupling-swatch--plasma { background: #e6ad60; border-color: #986122; }
 .coupling-illustration figcaption, .coupling-diagram figcaption { grid-column: 1 / -1; padding: 12px 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: .875rem; }
 .coupling-diagram { margin: 0; border: 1px solid var(--line); background: white; }
 .coupling-diagram-scroll { overflow-x: auto; padding: 18px; }
