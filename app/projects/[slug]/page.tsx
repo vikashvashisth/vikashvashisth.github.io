@@ -184,22 +184,61 @@ export default async function ProjectPage({params}:{params:Promise<{slug:string}
     {!project.portfolioStudy && <section className="contribution section-shell"><p className="eyebrow">My contribution</p><p>{project.contribution}</p></section>}
     {project.coupling && (
       <section id="coupling" className="case-coupling section-shell" aria-labelledby="coupling-title">
-        <div className="coupling-heading">
-          <p className="eyebrow">Extension of the reactor modelling work</p>
-          <h2 id="coupling-title">Electromagnetic-CFD coupling</h2>
-          <p>{project.coupling.introduction}</p>
+        <div className="coupling-header">
+          <div className="coupling-heading">
+            <p className="eyebrow">Extension of the reactor modelling work</p>
+            <h2 id="coupling-title">Electromagnetic-CFD coupling</h2>
+          </div>
+          <div className="coupling-verification">
+            <strong>Automated workflow implemented</strong>
+            <p>{project.coupling.status}</p>
+          </div>
         </div>
+        <p className="coupling-intro">{project.coupling.introduction}</p>
         <figure className="coupling-illustration">
           <img src={project.coupling.illustration.src} alt={project.coupling.illustration.alt} width={1672} height={941} loading="lazy" />
+          <div className="coupling-physical">
+            <p className="eyebrow">Physical concept</p>
+            <h3>Connecting the microwave field to the plasma state</h3>
+            <p>The plasma changes the electrical response of the gas. That response influences the electromagnetic field and the distribution of absorbed power.</p>
+            <ul>
+              <li>Microwave feed and applicator</li>
+              <li>Quartz reactor tube</li>
+              <li>Illustrative plasma region</li>
+            </ul>
+          </div>
           <figcaption>{project.coupling.illustration.caption}</figcaption>
         </figure>
-        <dl className="coupling-status">
-          {project.coupling.contributions.map(({ title, text }) => (
-            <div key={title}><dt>{title}</dt><dd>{text}</dd></div>
-          ))}
-        </dl>
-        <p className="coupling-verification">{project.coupling.status}</p>
-        <p className="coupling-note">{project.coupling.note}</p>
+        <div className="coupling-flow">
+          <div className="section-heading">
+            <div><p className="eyebrow">General coupling approach</p><h3>Following the physical feedback</h3></div>
+            <p>Fluent supplies the plasma state. A Drude model relates that state to complex permittivity, while HFSS calculates electromagnetic fields and power deposition.</p>
+          </div>
+          <figure className="coupling-diagram">
+            <div className="coupling-diagram-scroll" tabIndex={0} role="region" aria-label="HFSS-Fluent feedback diagram">
+              <img src="/research/plasma/hfss-fluent-feedback.svg" width={1000} height={290} loading="lazy"
+                alt="Fluent provides temperature, species and electron density. The Drude model converts these to complex relative permittivity for HFSS. After checking material representation and losses, volumetric heating returns to Fluent." />
+            </div>
+            <figcaption>General exchange sequence for the two solvers.</figcaption>
+          </figure>
+        </div>
+        <div className="coupling-contributions">
+          <p className="eyebrow">My contribution</p>
+          <h3>From manual electromagnetic studies to automated exchange</h3>
+          <dl className="coupling-status">
+            {project.coupling.contributions.map(({ title, text }) => (
+              <div key={title}><dt>{title}</dt><dd>{text}</dd></div>
+            ))}
+          </dl>
+        </div>
+        <div className="coupling-purpose">
+          <div><p className="eyebrow">Engineering purpose</p><h3>Understanding where the microwave power goes</h3></div>
+          <p>The workflow is intended to assess how changes in the plasma state influence microwave absorption and the spatial distribution of heating, then follow their effects on reactor temperature and chemistry.</p>
+        </div>
+        <details className="edu-archive">
+          <summary>How this extension relates to the published papers</summary>
+          <p>{project.coupling.note}</p>
+        </details>
       </section>
     )}
     {project.publications.length > 0 && <section id="case-record" className="case-publications section-shell"><p className="eyebrow">Related publications</p>{project.publications.map(pub=><article key={pub.title}><span>{pub.year}</span><div><h3>{pub.doi ? <a className="publication-doi-link" href={`https://doi.org/${pub.doi}`} target="_blank" rel="noreferrer">{pub.title} ↗</a> : pub.title}</h3><p>{pub.journal}</p></div></article>)}</section>}

@@ -87,11 +87,11 @@ export const projects: Project[] = [
     ],
     coupling: {
       introduction: "I extended the plasma reactor model with an automated two-way exchange between ANSYS Fluent and HFSS. The aim is to calculate where microwave power is absorbed and how that heating feeds back into the flow, temperature and chemistry.",
-      status: "The automated exchange is implemented. Verification of whole-domain material transfer and returned heating is ongoing.",
+      status: "Whole-domain material transfer and returned-heating verification in progress.",
       illustration: {
-        src: "/research/plasma/two-way-hfss-fluent-coupling.webp",
-        alt: "Conceptual microwave waveguide and plasma tube. Complex permittivity derived from the Fluent plasma state goes to HFSS. Volumetric heating returns to Fluent.",
-        caption: "Conceptual illustration of the solver exchange and simplified reactor geometry. The glow represents the plasma region schematically.",
+        src: "/research/plasma/microwave-plasma-reactor-cutaway.webp",
+        alt: "Conceptual cutaway of a rectangular microwave waveguide intersected by a quartz reactor tube containing an illustrative plasma region.",
+        caption: "Conceptual microwave-plasma configuration with simplified geometry. The glow represents the plasma region schematically.",
       },
       contributions: [
         { title: "Plasma-property modelling", text: "Used a Drude model to relate the Fluent plasma state, including transported electron density, to the complex permittivity supplied to HFSS." },
