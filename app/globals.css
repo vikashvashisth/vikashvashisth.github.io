@@ -446,7 +446,6 @@ a:focus-visible,summary:focus-visible,video:focus-visible,[tabindex]:focus-visib
 .model-evidence-items h3 {font-size:19px;line-height:1.5;margin:0 0 10px}
 .model-evidence-items p {font-size:16px;line-height:1.8;color:var(--muted)}
 .model-evidence-items a {font-size:14px;text-decoration:underline;text-underline-offset:4px}
-.work-authorisation {border-left:3px solid var(--blue);padding-left:16px}
 
 .case-model-evidence>h2 {font-size:clamp(25px,3vw,34px);line-height:1.25;letter-spacing:-.025em;margin:12px 0 18px}
 .case-model-evidence>p:not(.eyebrow) {font-size:16px;line-height:1.8;color:var(--muted)}
@@ -469,3 +468,7 @@ a:focus-visible,summary:focus-visible,video:focus-visible,[tabindex]:focus-visib
 .edu-integrated .edu-benchmark-figures img {display:block;width:100%;height:auto;}
 .edu-integrated .edu-benchmark-figures figcaption {display:flex;flex-direction:column;gap:10px;padding:22px;border-top:1px solid var(--line);font-size:16px;line-height:1.7;}
 .edu-integrated .edu-benchmark-figures figcaption span {color:var(--muted);}
+
+.portrait-visual { position: relative; }
+.portrait-authorisation { margin: 20px 0 0; padding-top: 16px; border-top: 1px solid var(--line); font-size: 14px; line-height: 1.65; color: var(--muted); }
+.portrait-authorisation strong { display: block; margin-bottom: 4px; color: var(--ink); font-weight: 600; }

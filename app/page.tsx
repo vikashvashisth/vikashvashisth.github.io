@@ -54,8 +54,11 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-portrait">
-          <div className="portrait-frame"><img src="/vikash-vashisth.webp" alt="Vikash Vashisth" fetchPriority="high" /></div>
-          <div className="portrait-note"><span>Currently</span><strong>Researcher at Chalmers</strong><small>Open to Work</small></div>
+          <div className="portrait-visual">
+            <div className="portrait-frame"><img src="/vikash-vashisth.webp" alt="Vikash Vashisth" fetchPriority="high" /></div>
+            <div className="portrait-note"><span>Currently</span><strong>Researcher at Chalmers</strong><small>Open to Work</small></div>
+          </div>
+          <p className="portrait-authorisation"><strong>Work authorisation:</strong> Authorised to work in Sweden. No employer sponsorship required to start employment.</p>
         </div>
       </section>
 
@@ -114,7 +117,6 @@ export default function Home() {
             <p>At Chalmers University of Technology, I lead CFD simulations and technical interpretation in collaborative reactor-development work. My experience spans plasma and reacting flows, interface-resolving multiphase simulations, rotor-stator mixers, non-Newtonian free surfaces and heat transfer.</p>
             <p>Collaborations with NitroCapt, Reckitt Benckiser, Maastricht University and Loughborough University have connected my modelling work with experiments and equipment performance. This includes presenting results, examining model assumptions and developing recommendations with experimental and engineering colleagues.</p>
             <p>I am pursuing industry roles in CFD and simulation engineering, applying this experience to design development, performance evaluation and challenging flow problems.</p>
-            <p className="work-authorisation"><strong>Work authorisation:</strong> Authorised to work in Sweden. No employer sponsorship required to start employment.</p>
             <div className="profile-links"><a href="https://www.linkedin.com/in/vikash-vashisth-phd-b8576838" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://scholar.google.co.in/citations?user=JfO8GY8AAAAJ&hl=en" target="_blank" rel="noreferrer">Google Scholar ↗</a><a href="https://orcid.org/0000-0003-4644-2624" target="_blank" rel="noreferrer">ORCID ↗</a><a href="mailto:vikasche.engg@gmail.com">Email ↗</a></div>
           </div>
         </div>
