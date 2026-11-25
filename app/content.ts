@@ -31,7 +31,13 @@ export type Project = {
   cardImage?: { src: string; alt: string };
   figures: { title: string; src?: string; alt?: string; caption?: string }[];
   videos?: { title: string; src: string; poster: string; caption: string }[];
-  coupling?: { completed: string; details: string; note: string };
+  coupling?: {
+    introduction: string;
+    status: string;
+    illustration: { src: string; alt: string; caption: string };
+    contributions: { title: string; text: string }[];
+    note: string;
+  };
   conference?: {
     eyebrow?: string;
     title: string;
@@ -80,9 +86,19 @@ export const projects: Project[] = [
       { title: "Axial nitric-oxide molar-flow comparison", src: "/research/plasma/quenching-performance.webp", alt: "Nitric-oxide molar flow versus axial position for non-quenching at 20 SLM and forced quenching at 10 plus 10 SLM", caption: "The curves compare axial NO molar flow for the 20 SLM non-quenching case and the 10+10 SLM forced-quenching case, with jet injection at x/D = 8. The source figure labels 54.3% as potential maximum quenching efficiency; this is a different metric from the reported 6-10% NO-yield improvement." },
     ],
     coupling: {
-      completed: "Developed fully automated two-way HFSS-Fluent coupling using PyAEDT and PyFluent, integrating electromagnetic power deposition with fluid flow, heat transfer and finite-rate chemistry.",
-      details: "Automated iterative exchange connects electromagnetic power deposition in HFSS with plasma properties calculated in Fluent.",
-      note: "This workflow is a separate extension to the plasma work, not the method used to obtain the published 2024 and 2026 results presented above.",
+      introduction: "I extended the plasma reactor model with an automated two-way exchange between ANSYS Fluent and HFSS. The aim is to calculate where microwave power is absorbed and how that heating feeds back into the flow, temperature and chemistry.",
+      status: "The automated exchange is implemented. Verification of whole-domain material transfer and returned heating is ongoing.",
+      illustration: {
+        src: "/research/plasma/two-way-hfss-fluent-coupling.webp",
+        alt: "Conceptual microwave waveguide and plasma tube. Complex permittivity derived from the Fluent plasma state goes to HFSS. Volumetric heating returns to Fluent.",
+        caption: "Conceptual illustration of the solver exchange and simplified reactor geometry. The glow represents the plasma region schematically.",
+      },
+      contributions: [
+        { title: "Plasma-property modelling", text: "Used a Drude model to relate the Fluent plasma state, including transported electron density, to the complex permittivity supplied to HFSS." },
+        { title: "Solver integration", text: "Automated the exchange with PyFluent and PyAEDT so HFSS power deposition can be returned to Fluent as a volumetric heat source." },
+        { title: "Numerical verification", text: "Compared the intended material properties with HFSS readback and checked loss signs and power balance." },
+      ],
+      note: "The 2024 and 2026 publications report the earlier reactor modelling and experimental comparisons. The coupling workflow is a subsequent extension.",
     },
     publications: [{ title: "Analysis of a Plasma Reactor Performance for Direct Nitrogen Fixation by Use of Three-Dimensional Simulations and Experiments", journal: "Chemical Engineering Journal 497, 154756", year: "2024", doi: "10.1016/j.cej.2024.154756" }, { title: "Analysis of Forced and Intrinsic Quenching in a Plasma Reactor for Nitrogen Fixation by Use of Three-Dimensional Simulations and Experiments", journal: "Chemical Engineering Journal 543, 178575", year: "2026", doi: "10.1016/j.cej.2026.178575" }],
   },

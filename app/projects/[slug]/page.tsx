@@ -163,7 +163,7 @@ export default async function ProjectPage({params}:{params:Promise<{slug:string}
   return <main className="case-page"><header className="case-nav"><a className="wordmark" href="/">VV<span>.</span></a><nav aria-label="Project navigation"><a href="/#projects">All projects</a><a href="/Vikash_Vashisth_CV.pdf?v=20261019-cv">Industry CV</a><a href="mailto:vikasche.engg@gmail.com">Contact</a></nav></header>
     <section className="case-hero section-shell"><p className="eyebrow">Case study {project.index} · {project.discipline}</p><h1>{project.title}</h1><p>{project.portfolioStudy ? project.summary : project.introduction ?? project.summary}</p></section>
     {project.contributionSummary && <section className="early-contribution section-shell"><p className="eyebrow">My contribution</p><p>{project.contributionSummary}</p></section>}
-    {!project.portfolioStudy && <nav className="case-section-nav section-shell" aria-label="Case study sections"><a href="#case-outcomes">Engineering outcomes</a><a href="#case-evidence">Figures and evidence</a><a href="#case-record">Publications</a></nav>}
+    {!project.portfolioStudy && <nav className="case-section-nav section-shell" aria-label="Case study sections"><a href="#case-outcomes">Engineering outcomes</a><a href="#case-evidence">Figures and evidence</a>{project.coupling && <a href="#coupling">Electromagnetic-CFD coupling</a>}<a href="#case-record">Publications</a></nav>}
     {project.portfolioStudy ? <PortfolioStudy study={project.portfolioStudy}/> : <>
       <section className="case-visual section-shell">{project.heroImage ? <figure className="hero-research-figure"><a className="research-figure-link" href={project.heroImage.src} target="_blank" rel="noreferrer" aria-label={`Open full-size figure: ${project.heroImage.alt} (new tab)`}><img src={project.heroImage.src} alt={project.heroImage.alt}/></a><figcaption>{project.heroImage.caption}<a className="figure-fullsize" href={project.heroImage.src} target="_blank" rel="noreferrer">Open full-size figure <span aria-hidden="true">↗</span><span className="sr-only"> (new tab)</span></a></figcaption></figure> : <div className="large-placeholder"><span>Project figure</span><small>High-resolution export to be added</small></div>}</section>
       <section className="case-body section-shell"><aside><p className="eyebrow">Engineering question</p><h2>{project.question}</h2></aside><div><p className="eyebrow">Modelling approach</p><ol>{project.approach.map((item,i)=><li key={item}><span>0{i+1}</span>{item}</li>)}</ol></div></section>
@@ -178,17 +178,30 @@ export default async function ProjectPage({params}:{params:Promise<{slug:string}
     {project.conference && <CaseFeature feature={project.conference}/>} 
 
     {project.breakupAnimations && <section className="breakup-animations section-shell" aria-labelledby="breakup-animations-title"><p className="eyebrow">Interface-resolving simulation</p><h2 id="breakup-animations-title">Breakup animations</h2><p>Rendered interfaces show deformation and fragmentation. The blue geometry provides spatial context. Player time is playback time, not a recovered simulation timestamp.</p><div className="breakup-animation-featured">{project.breakupAnimations.featured.map(video=><AnimationPlayer key={video.src} video={video}/>)}</div><details className="breakup-animation-supporting"><summary>Additional views</summary><div className="video-grid">{project.breakupAnimations.supporting.map(video=><AnimationPlayer key={video.src} video={video}/>)}</div></details></section>}
-    {project.coupling && <section className="case-coupling section-shell" aria-labelledby="coupling-title">
-      <div className="coupling-heading"><p className="eyebrow">Completed multiphysics workflow</p><h2 id="coupling-title">HFSS-Fluent Coupling</h2><p>{project.coupling.note}</p></div>
-      <dl className="coupling-status">
-        <div><dt>Implemented workflow</dt><dd>{project.coupling.completed}</dd></div>
-        <div><dt>Two-way data exchange</dt><dd>{project.coupling.details}</dd></div>
-      </dl>
-    </section>}
     {project.videos && <section className="case-videos section-shell"><div className="section-heading"><div><p className="eyebrow">Transient mixing</p><h2>Tracer Transport Across Three Stator Designs</h2></div><p>Original thesis simulations compare circular-hole, fine-hole and slotted stators side by side.</p></div><div className="video-grid"><AnimationPlayer video={project.videos[0]}/></div><details className="supporting-details"><summary>Additional tracer-release locations</summary><div className="video-grid">{project.videos.slice(1).map(video=><AnimationPlayer key={video.src} video={video}/>)}</div></details></section>}
     {project.collaboration && <CaseFeature feature={project.collaboration}/>} 
     {project.experimental && <details className="supporting-details section-shell"><summary>Supporting experimental work: nanoparticle de-agglomeration</summary><CaseFeature feature={project.experimental} variant="experiment"/></details>}
     {!project.portfolioStudy && <section className="contribution section-shell"><p className="eyebrow">My contribution</p><p>{project.contribution}</p></section>}
+    {project.coupling && (
+      <section id="coupling" className="case-coupling section-shell" aria-labelledby="coupling-title">
+        <div className="coupling-heading">
+          <p className="eyebrow">Extension of the reactor modelling work</p>
+          <h2 id="coupling-title">Electromagnetic-CFD coupling</h2>
+          <p>{project.coupling.introduction}</p>
+        </div>
+        <figure className="coupling-illustration">
+          <img src={project.coupling.illustration.src} alt={project.coupling.illustration.alt} width={1672} height={941} loading="lazy" />
+          <figcaption>{project.coupling.illustration.caption}</figcaption>
+        </figure>
+        <dl className="coupling-status">
+          {project.coupling.contributions.map(({ title, text }) => (
+            <div key={title}><dt>{title}</dt><dd>{text}</dd></div>
+          ))}
+        </dl>
+        <p className="coupling-verification">{project.coupling.status}</p>
+        <p className="coupling-note">{project.coupling.note}</p>
+      </section>
+    )}
     {project.publications.length > 0 && <section id="case-record" className="case-publications section-shell"><p className="eyebrow">Related publications</p>{project.publications.map(pub=><article key={pub.title}><span>{pub.year}</span><div><h3>{pub.doi ? <a className="publication-doi-link" href={`https://doi.org/${pub.doi}`} target="_blank" rel="noreferrer">{pub.title} ↗</a> : pub.title}</h3><p>{pub.journal}</p></div></article>)}</section>}
     <a className="next-project" href={`/projects/${next.slug}/`}><span>Next case study</span><strong>{next.shortTitle} ↗</strong></a>
   </main>;
